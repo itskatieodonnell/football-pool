@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NFL Pick 'Em Pool Manager 2025</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1>🏈 2025 NFL Pick 'Em Pool</h1>
+                <div class="pool-info">
+                    <span class="pool-stat">Pool Size: <strong id="pool-size">6</strong> players</span>
+                    <span class="pool-stat">Total Pot: <strong id="total-pot">$120</strong></span>
+                    <span class="pool-stat">Week: <strong id="current-week-display">1</strong> of 18</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Prize Structure -->
+        <div class="prize-structure card">
+            <div class="card__body">
+                <h3>Prize Structure</h3>
+                <div class="prizes">
+                    <span class="prize">🥇 1st: <strong id="first-prize">$72</strong> (60%)</span>
+                    <span class="prize">🥈 2nd: <strong id="second-prize">$30</strong> (25%)</span>
+                    <span class="prize">🥉 3rd: <strong id="third-prize">$18</strong> (15%)</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="nav-tabs">
+            <button class="nav-tab active" data-tab="picks">Weekly Picks</button>
+            <button class="nav-tab" data-tab="standings">Standings</button>
+            <button class="nav-tab" data-tab="team-tracker">Team Tracker</button>
+            <button class="nav-tab" data-tab="admin">Admin</button>
+        </nav>
+
+        <!-- Weekly Picks Tab -->
+        <div id="picks" class="tab-content active">
+            <div class="week-controls">
+                <button id="prev-week" class="btn btn--outline btn--sm">← Previous Week</button>
+                <h2 id="week-title">Week 1 Games</h2>
+                <button id="next-week" class="btn btn--outline btn--sm">Next Week →</button>
+            </div>
+
+            <div class="picks-section">
+                <div class="games-column">
+                    <h3>Games This Week</h3>
+                    <div id="games-list" class="games-list"></div>
+                </div>
+                
+                <div class="picks-column">
+                    <h3>Player Picks</h3>
+                    <div class="player-selector">
+                        <select id="player-select" class="form-control">
+                            <option value="">Select a player...</option>
+                        </select>
+                    </div>
+                    <div id="player-picks-interface" class="player-picks-interface hidden">
+                        <div class="used-teams">
+                            <h4>Teams Already Used</h4>
+                            <div id="used-teams-list" class="used-teams-list"></div>
+                        </div>
+                        <div class="available-picks">
+                            <h4>Make Your Pick</h4>
+                            <div id="available-picks-list" class="available-picks-list"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Standings Tab -->
+        <div id="standings" class="tab-content">
+            <div class="standings-header">
+                <h2>Season Standings</h2>
+                <div class="standings-stats">
+                    <span>After Week <span id="standings-week">1</span></span>
+                </div>
+            </div>
+            <div id="standings-table" class="standings-table"></div>
+        </div>
+
+        <!-- Team Tracker Tab -->
+        <div id="team-tracker" class="tab-content">
+            <h2>Team Usage Matrix</h2>
+            <div class="team-tracker-container">
+                <div id="team-matrix" class="team-matrix"></div>
+            </div>
+        </div>
+
+        <!-- Admin Tab -->
+        <div id="admin" class="tab-content">
+            <h2>Admin Panel</h2>
+            
+            <div class="admin-section">
+                <h3>Player Management</h3>
+                <div class="player-management">
+                    <div class="add-player">
+                        <input type="text" id="new-player-name" class="form-control" placeholder="Player name">
+                        <button id="add-player" class="btn btn--primary">Add Player</button>
+                    </div>
+                    <div id="players-list" class="players-list"></div>
+                </div>
+            </div>
+
+            <div class="admin-section">
+                <h3>Game Results</h3>
+                <div class="week-selector">
+                    <label class="form-label">Select Week:</label>
+                    <select id="results-week-select" class="form-control">
+                        <option value="1">Week 1</option>
+                    </select>
+                </div>
+                <div id="results-interface" class="results-interface"></div>
+            </div>
+
+            <div class="admin-section">
+                <h3>Season Management</h3>
+                <div class="season-controls">
+                    <button id="reset-season" class="btn btn--outline">Reset Season</button>
+                    <button id="export-data" class="btn btn--secondary">Export Data</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
