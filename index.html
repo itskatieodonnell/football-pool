@@ -30,101 +30,298 @@
                     <span class="prize">🥉 3rd: <strong id="third-prize">$18</strong> (15%)</span>
                 </div>
             </div>
-        </div>
+        </header>
 
-        <!-- Navigation -->
+        <!-- Navigation (Admin tab hidden) -->
         <nav class="nav-tabs">
             <button class="nav-tab active" data-tab="picks">Weekly Picks</button>
             <button class="nav-tab" data-tab="standings">Standings</button>
             <button class="nav-tab" data-tab="team-tracker">Team Tracker</button>
-            <button class="nav-tab" data-tab="admin">Admin</button>
+            <!-- Admin tab hidden from regular navigation -->
+            <button class="nav-tab" data-tab="admin" id="admin-tab" style="display: none;">Admin</button>
         </nav>
 
         <!-- Weekly Picks Tab -->
         <div id="picks" class="tab-content active">
             <div class="week-controls">
                 <button id="prev-week" class="btn btn--outline btn--sm">← Previous Week</button>
-                <h2 id="week-title">Week 1 Games</h2>
+                <span class="week-display">Week <span id="week-number">1</span></span>
                 <button id="next-week" class="btn btn--outline btn--sm">Next Week →</button>
             </div>
 
-            <div class="picks-section">
-                <div class="games-column">
-                    <h3>Games This Week</h3>
-                    <div id="games-list" class="games-list"></div>
+            <div class="pick-interface">
+                <div class="player-selector">
+                    <label for="current-player">Select Player:</label>
+                    <select id="current-player">
+                        <option value="">Choose a player...</option>
+                    </select>
                 </div>
-                
-                <div class="picks-column">
-                    <h3>Player Picks</h3>
-                    <div class="player-selector">
-                        <select id="player-select" class="form-control">
-                            <option value="">Select a player...</option>
-                        </select>
-                    </div>
-                    <div id="player-picks-interface" class="player-picks-interface hidden">
-                        <div class="used-teams">
-                            <h4>Teams Already Used</h4>
-                            <div id="used-teams-list" class="used-teams-list"></div>
+
+                <div id="games-container">
+                    <div class="games-list">
+                        <h4>Week 1 Games</h4>
+                        <div class="game-item">
+                            <div class="game-info">
+                                <span class="game-time">Thu 9/4, 8:20 PM</span>
+                                <div class="matchup">Dallas Cowboys @ Philadelphia Eagles</div>
+                            </div>
+                            <div class="pick-options">
+                                <button class="pick-btn" data-team="Dallas Cowboys">DAL</button>
+                                <button class="pick-btn" data-team="Philadelphia Eagles">PHI</button>
+                            </div>
                         </div>
-                        <div class="available-picks">
-                            <h4>Make Your Pick</h4>
-                            <div id="available-picks-list" class="available-picks-list"></div>
+                        <div class="game-item">
+                            <div class="game-info">
+                                <span class="game-time">Fri 9/5, 8:00 PM</span>
+                                <div class="matchup">Kansas City Chiefs @ Los Angeles Chargers</div>
+                            </div>
+                            <div class="pick-options">
+                                <button class="pick-btn" data-team="Kansas City Chiefs">KC</button>
+                                <button class="pick-btn" data-team="Los Angeles Chargers">LAC</button>
+                            </div>
+                        </div>
+                        <div class="game-item">
+                            <div class="game-info">
+                                <span class="game-time">Sun 9/7, 1:00 PM</span>
+                                <div class="matchup">Las Vegas Raiders @ New England Patriots</div>
+                            </div>
+                            <div class="pick-options">
+                                <button class="pick-btn" data-team="Las Vegas Raiders">LV</button>
+                                <button class="pick-btn" data-team="New England Patriots">NE</button>
+                            </div>
+                        </div>
+                        <div class="game-item">
+                            <div class="game-info">
+                                <span class="game-time">Sun 9/7, 1:00 PM</span>
+                                <div class="matchup">Pittsburgh Steelers @ New York Jets</div>
+                            </div>
+                            <div class="pick-options">
+                                <button class="pick-btn" data-team="Pittsburgh Steelers">PIT</button>
+                                <button class="pick-btn" data-team="New York Jets">NYJ</button>
+                            </div>
+                        </div>
+                        <div class="game-item">
+                            <div class="game-info">
+                                <span class="game-time">Sun 9/7, 1:00 PM</span>
+                                <div class="matchup">Miami Dolphins @ Indianapolis Colts</div>
+                            </div>
+                            <div class="pick-options">
+                                <button class="pick-btn" data-team="Miami Dolphins">MIA</button>
+                                <button class="pick-btn" data-team="Indianapolis Colts">IND</button>
+                            </div>
+                        </div>
+                        <div class="game-item">
+                            <div class="game-info">
+                                <span class="game-time">Sun 9/7, 8:20 PM</span>
+                                <div class="matchup">Baltimore Ravens @ Buffalo Bills</div>
+                            </div>
+                            <div class="pick-options">
+                                <button class="pick-btn" data-team="Baltimore Ravens">BAL</button>
+                                <button class="pick-btn" data-team="Buffalo Bills">BUF</button>
+                            </div>
+                        </div>
+                        <div class="game-item">
+                            <div class="game-info">
+                                <span class="game-time">Mon 9/8, 8:15 PM</span>
+                                <div class="matchup">Minnesota Vikings @ Chicago Bears</div>
+                            </div>
+                            <div class="pick-options">
+                                <button class="pick-btn" data-team="Minnesota Vikings">MIN</button>
+                                <button class="pick-btn" data-team="Chicago Bears">CHI</button>
+                            </div>
                         </div>
                     </div>
                 </div>
+
+                <div id="player-constraints" class="constraints-display">
+                    <h4>Teams Already Used:</h4>
+                    <div class="used-teams">
+                        <em>Select a player above to see their used teams</em>
+                    </div>
+                </div>
+
+                <button id="submit-pick" class="btn btn--primary" style="margin-top: 20px;">Submit Pick</button>
             </div>
         </div>
 
         <!-- Standings Tab -->
         <div id="standings" class="tab-content">
-            <div class="standings-header">
-                <h2>Season Standings</h2>
-                <div class="standings-stats">
-                    <span>After Week <span id="standings-week">1</span></span>
-                </div>
+            <div class="standings-table">
+                <h3>Current Standings</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Player</th>
+                            <th>Points</th>
+                            <th>Last Pick</th>
+                        </tr>
+                    </thead>
+                    <tbody id="standings-tbody">
+                        <tr>
+                            <td>1</td>
+                            <td>John Smith</td>
+                            <td>0</td>
+                            <td>Kansas City Chiefs</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Sarah Johnson</td>
+                            <td>0</td>
+                            <td>Buffalo Bills</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Mike Davis</td>
+                            <td>0</td>
+                            <td>Philadelphia Eagles</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>Lisa Chen</td>
+                            <td>0</td>
+                            <td>San Francisco 49ers</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>Tom Wilson</td>
+                            <td>0</td>
+                            <td>Green Bay Packers</td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>Emma Rodriguez</td>
+                            <td>0</td>
+                            <td>Baltimore Ravens</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-            <div id="standings-table" class="standings-table"></div>
         </div>
 
         <!-- Team Tracker Tab -->
         <div id="team-tracker" class="tab-content">
-            <h2>Team Usage Matrix</h2>
-            <div class="team-tracker-container">
-                <div id="team-matrix" class="team-matrix"></div>
+            <div class="team-matrix">
+                <h3>Team Usage Matrix</h3>
+                <p><em>Track which teams each player has already picked</em></p>
+                <div class="matrix-container">
+                    <table class="team-matrix-table">
+                        <thead>
+                            <tr>
+                                <th>Player</th>
+                                <th>Teams Used</th>
+                                <th>Remaining</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>John Smith</td>
+                                <td>Kansas City Chiefs</td>
+                                <td>31</td>
+                            </tr>
+                            <tr>
+                                <td>Sarah Johnson</td>
+                                <td>Buffalo Bills</td>
+                                <td>31</td>
+                            </tr>
+                            <tr>
+                                <td>Mike Davis</td>
+                                <td>Philadelphia Eagles</td>
+                                <td>31</td>
+                            </tr>
+                            <tr>
+                                <td>Lisa Chen</td>
+                                <td>San Francisco 49ers</td>
+                                <td>31</td>
+                            </tr>
+                            <tr>
+                                <td>Tom Wilson</td>
+                                <td>Green Bay Packers</td>
+                                <td>31</td>
+                            </tr>
+                            <tr>
+                                <td>Emma Rodriguez</td>
+                                <td>Baltimore Ravens</td>
+                                <td>31</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
-        <!-- Admin Tab -->
+        <!-- Admin Tab (Hidden) -->
         <div id="admin" class="tab-content">
-            <h2>Admin Panel</h2>
-            
-            <div class="admin-section">
-                <h3>Player Management</h3>
-                <div class="player-management">
-                    <div class="add-player">
-                        <input type="text" id="new-player-name" class="form-control" placeholder="Player name">
-                        <button id="add-player" class="btn btn--primary">Add Player</button>
+            <div class="admin-panel">
+                <div class="admin-header">
+                    <h2>🔐 Admin Panel</h2>
+                    <p><em>Only pool administrators should access this section</em></p>
+                </div>
+
+                <div class="admin-section">
+                    <h3>Player Management</h3>
+                    <div class="player-management">
+                        <input type="text" id="new-player-name" placeholder="New player name">
+                        <button id="add-player" class="btn">Add Player</button>
                     </div>
-                    <div id="players-list" class="players-list"></div>
+                    <div id="player-list">
+                        <div class="player-item">
+                            <span>John Smith</span>
+                            <button class="btn btn--danger btn--sm">Remove</button>
+                        </div>
+                        <div class="player-item">
+                            <span>Sarah Johnson</span>
+                            <button class="btn btn--danger btn--sm">Remove</button>
+                        </div>
+                        <div class="player-item">
+                            <span>Mike Davis</span>
+                            <button class="btn btn--danger btn--sm">Remove</button>
+                        </div>
+                        <div class="player-item">
+                            <span>Lisa Chen</span>
+                            <button class="btn btn--danger btn--sm">Remove</button>
+                        </div>
+                        <div class="player-item">
+                            <span>Tom Wilson</span>
+                            <button class="btn btn--danger btn--sm">Remove</button>
+                        </div>
+                        <div class="player-item">
+                            <span>Emma Rodriguez</span>
+                            <button class="btn btn--danger btn--sm">Remove</button>
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="admin-section">
-                <h3>Game Results</h3>
-                <div class="week-selector">
-                    <label class="form-label">Select Week:</label>
-                    <select id="results-week-select" class="form-control">
-                        <option value="1">Week 1</option>
-                    </select>
+                <div class="admin-section">
+                    <h3>Game Results</h3>
+                    <div class="results-entry">
+                        <div class="game-result">
+                            <span>Cowboys @ Eagles:</span>
+                            <select>
+                                <option value="">Select Winner</option>
+                                <option value="Cowboys">Cowboys</option>
+                                <option value="Eagles">Eagles</option>
+                            </select>
+                        </div>
+                        <div class="game-result">
+                            <span>Chiefs @ Chargers:</span>
+                            <select>
+                                <option value="">Select Winner</option>
+                                <option value="Chiefs">Chiefs</option>
+                                <option value="Chargers">Chargers</option>
+                            </select>
+                        </div>
+                        <button class="btn btn--primary">Update Results</button>
+                    </div>
                 </div>
-                <div id="results-interface" class="results-interface"></div>
-            </div>
 
-            <div class="admin-section">
-                <h3>Season Management</h3>
-                <div class="season-controls">
-                    <button id="reset-season" class="btn btn--outline">Reset Season</button>
-                    <button id="export-data" class="btn btn--secondary">Export Data</button>
+                <div class="admin-section">
+                    <h3>Pool Settings</h3>
+                    <div class="pool-settings">
+                        <label>Entry Fee: $<input type="number" id="entry-fee" value="20"></label>
+                        <label>Current Week: <input type="number" id="admin-current-week" value="1" min="1" max="18"></label>
+                        <button id="update-settings" class="btn">Update Settings</button>
+                    </div>
                 </div>
             </div>
         </div>
