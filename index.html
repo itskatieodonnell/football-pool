@@ -4,329 +4,777 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NFL Pick 'Em Pool Manager 2025</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Inline CSS for better reliability */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+
+        .header {
+            background: linear-gradient(135deg, #013369 0%, #041E42 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .header h1 { font-size: 2.5em; margin-bottom: 10px; }
+
+        .pool-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .prize-structure {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .prizes {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .nav-tabs {
+            display: flex;
+            background: white;
+            border-radius: 10px;
+            padding: 5px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-tab {
+            flex: 1;
+            padding: 15px 20px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 500;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-tab:hover { background-color: #f0f0f0; }
+        .nav-tab.active { background-color: #013369; color: white; }
+
+        .tab-content {
+            display: none;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            min-height: 500px;
+        }
+
+        .tab-content.active { display: block; }
+
+        .admin-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #e8f5e8;
+            border-radius: 8px;
+            border-left: 5px solid #28a745;
+        }
+
+        .admin-section {
+            margin-bottom: 40px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+
+        .player-management {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            align-items: center;
+        }
+
+        .player-management input {
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            font-size: 1em;
+            flex: 1;
+            max-width: 300px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1em;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn--primary { background-color: #013369; color: white; }
+        .btn--primary:hover { background-color: #041E42; }
+        .btn--danger { background-color: #dc3545; color: white; }
+        .btn--danger:hover { background-color: #c82333; }
+        .btn--sm { padding: 8px 16px; font-size: 0.9em; }
+
+        .player-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            margin-bottom: 10px;
+            background-color: #f8f9fa;
+            border-radius: 6px;
+            border: 1px solid #e9ecef;
+        }
+
+        .debug-info {
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 20px;
+            font-family: monospace;
+            font-size: 0.9em;
+        }
+
+        .error-message {
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 20px;
+            color: #721c24;
+        }
+
+        .success-message {
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 20px;
+            color: #155724;
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 10px; }
+            .header h1 { font-size: 2em; }
+            .pool-info { flex-direction: column; gap: 10px; }
+            .nav-tabs { flex-direction: column; }
+            .player-management { flex-direction: column; align-items: stretch; }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <!-- Header -->
         <header class="header">
             <div class="header-content">
-                <h1>🏈 2025 NFL Pick 'Em Pool</h1>
+                <h1 id="main-title">🏈 2025 NFL Pick 'Em Pool</h1>
                 <div class="pool-info">
-                    <span class="pool-stat">Pool Size: <strong id="pool-size">6</strong> players</span>
-                    <span class="pool-stat">Total Pot: <strong id="total-pot">$120</strong></span>
+                    <span class="pool-stat">Pool Size: <strong id="pool-size">0</strong> players</span>
+                    <span class="pool-stat">Total Pot: <strong id="total-pot">$0</strong></span>
                     <span class="pool-stat">Week: <strong id="current-week-display">1</strong> of 18</span>
                 </div>
             </div>
         </header>
 
-        <!-- Prize Structure -->
-        <div class="prize-structure card">
+        <div class="prize-structure">
             <div class="card__body">
                 <h3>Prize Structure</h3>
                 <div class="prizes">
-                    <span class="prize">🥇 1st: <strong id="first-prize">$72</strong> (60%)</span>
-                    <span class="prize">🥈 2nd: <strong id="second-prize">$30</strong> (25%)</span>
-                    <span class="prize">🥉 3rd: <strong id="third-prize">$18</strong> (15%)</span>
+                    <span class="prize">🥇 1st: <strong id="first-prize">$0</strong> (60%)</span>
+                    <span class="prize">🥈 2nd: <strong id="second-prize">$0</strong> (25%)</span>
+                    <span class="prize">🥉 3rd: <strong id="third-prize">$0</strong> (15%)</span>
                 </div>
             </div>
-        </header>
+        </div>
 
-        <!-- Navigation (Admin tab hidden) -->
         <nav class="nav-tabs">
             <button class="nav-tab active" data-tab="picks">Weekly Picks</button>
             <button class="nav-tab" data-tab="standings">Standings</button>
             <button class="nav-tab" data-tab="team-tracker">Team Tracker</button>
-            <!-- Admin tab hidden from regular navigation -->
             <button class="nav-tab" data-tab="admin" id="admin-tab" style="display: none;">Admin</button>
         </nav>
 
         <!-- Weekly Picks Tab -->
         <div id="picks" class="tab-content active">
-            <div class="week-controls">
-                <button id="prev-week" class="btn btn--outline btn--sm">← Previous Week</button>
-                <span class="week-display">Week <span id="week-number">1</span></span>
-                <button id="next-week" class="btn btn--outline btn--sm">Next Week →</button>
-            </div>
-
-            <div class="pick-interface">
-                <div class="player-selector">
-                    <label for="current-player">Select Player:</label>
-                    <select id="current-player">
-                        <option value="">Choose a player...</option>
-                    </select>
-                </div>
-
-                <div id="games-container">
-                    <div class="games-list">
-                        <h4>Week 1 Games</h4>
-                        <div class="game-item">
-                            <div class="game-info">
-                                <span class="game-time">Thu 9/4, 8:20 PM</span>
-                                <div class="matchup">Dallas Cowboys @ Philadelphia Eagles</div>
-                            </div>
-                            <div class="pick-options">
-                                <button class="pick-btn" data-team="Dallas Cowboys">DAL</button>
-                                <button class="pick-btn" data-team="Philadelphia Eagles">PHI</button>
-                            </div>
-                        </div>
-                        <div class="game-item">
-                            <div class="game-info">
-                                <span class="game-time">Fri 9/5, 8:00 PM</span>
-                                <div class="matchup">Kansas City Chiefs @ Los Angeles Chargers</div>
-                            </div>
-                            <div class="pick-options">
-                                <button class="pick-btn" data-team="Kansas City Chiefs">KC</button>
-                                <button class="pick-btn" data-team="Los Angeles Chargers">LAC</button>
-                            </div>
-                        </div>
-                        <div class="game-item">
-                            <div class="game-info">
-                                <span class="game-time">Sun 9/7, 1:00 PM</span>
-                                <div class="matchup">Las Vegas Raiders @ New England Patriots</div>
-                            </div>
-                            <div class="pick-options">
-                                <button class="pick-btn" data-team="Las Vegas Raiders">LV</button>
-                                <button class="pick-btn" data-team="New England Patriots">NE</button>
-                            </div>
-                        </div>
-                        <div class="game-item">
-                            <div class="game-info">
-                                <span class="game-time">Sun 9/7, 1:00 PM</span>
-                                <div class="matchup">Pittsburgh Steelers @ New York Jets</div>
-                            </div>
-                            <div class="pick-options">
-                                <button class="pick-btn" data-team="Pittsburgh Steelers">PIT</button>
-                                <button class="pick-btn" data-team="New York Jets">NYJ</button>
-                            </div>
-                        </div>
-                        <div class="game-item">
-                            <div class="game-info">
-                                <span class="game-time">Sun 9/7, 1:00 PM</span>
-                                <div class="matchup">Miami Dolphins @ Indianapolis Colts</div>
-                            </div>
-                            <div class="pick-options">
-                                <button class="pick-btn" data-team="Miami Dolphins">MIA</button>
-                                <button class="pick-btn" data-team="Indianapolis Colts">IND</button>
-                            </div>
-                        </div>
-                        <div class="game-item">
-                            <div class="game-info">
-                                <span class="game-time">Sun 9/7, 8:20 PM</span>
-                                <div class="matchup">Baltimore Ravens @ Buffalo Bills</div>
-                            </div>
-                            <div class="pick-options">
-                                <button class="pick-btn" data-team="Baltimore Ravens">BAL</button>
-                                <button class="pick-btn" data-team="Buffalo Bills">BUF</button>
-                            </div>
-                        </div>
-                        <div class="game-item">
-                            <div class="game-info">
-                                <span class="game-time">Mon 9/8, 8:15 PM</span>
-                                <div class="matchup">Minnesota Vikings @ Chicago Bears</div>
-                            </div>
-                            <div class="pick-options">
-                                <button class="pick-btn" data-team="Minnesota Vikings">MIN</button>
-                                <button class="pick-btn" data-team="Chicago Bears">CHI</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="player-constraints" class="constraints-display">
-                    <h4>Teams Already Used:</h4>
-                    <div class="used-teams">
-                        <em>Select a player above to see their used teams</em>
-                    </div>
-                </div>
-
-                <button id="submit-pick" class="btn btn--primary" style="margin-top: 20px;">Submit Pick</button>
-            </div>
+            <h3>Weekly Picks</h3>
+            <p>This would be your weekly picks interface.</p>
+            <p><strong>To test admin functions:</strong> Add <code>#admin</code> to your URL</p>
         </div>
 
         <!-- Standings Tab -->
         <div id="standings" class="tab-content">
-            <div class="standings-table">
-                <h3>Current Standings</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Rank</th>
-                            <th>Player</th>
-                            <th>Points</th>
-                            <th>Last Pick</th>
-                        </tr>
-                    </thead>
-                    <tbody id="standings-tbody">
-                        <tr>
-                            <td>1</td>
-                            <td>John Smith</td>
-                            <td>0</td>
-                            <td>Kansas City Chiefs</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Sarah Johnson</td>
-                            <td>0</td>
-                            <td>Buffalo Bills</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Mike Davis</td>
-                            <td>0</td>
-                            <td>Philadelphia Eagles</td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>Lisa Chen</td>
-                            <td>0</td>
-                            <td>San Francisco 49ers</td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>Tom Wilson</td>
-                            <td>0</td>
-                            <td>Green Bay Packers</td>
-                        </tr>
-                        <tr>
-                            <td>6</td>
-                            <td>Emma Rodriguez</td>
-                            <td>0</td>
-                            <td>Baltimore Ravens</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <h3>Current Standings</h3>
+            <div id="standings-content">
+                <p>No players in pool yet. Add players in the admin section.</p>
             </div>
         </div>
 
         <!-- Team Tracker Tab -->
         <div id="team-tracker" class="tab-content">
-            <div class="team-matrix">
-                <h3>Team Usage Matrix</h3>
-                <p><em>Track which teams each player has already picked</em></p>
-                <div class="matrix-container">
-                    <table class="team-matrix-table">
-                        <thead>
-                            <tr>
-                                <th>Player</th>
-                                <th>Teams Used</th>
-                                <th>Remaining</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>John Smith</td>
-                                <td>Kansas City Chiefs</td>
-                                <td>31</td>
-                            </tr>
-                            <tr>
-                                <td>Sarah Johnson</td>
-                                <td>Buffalo Bills</td>
-                                <td>31</td>
-                            </tr>
-                            <tr>
-                                <td>Mike Davis</td>
-                                <td>Philadelphia Eagles</td>
-                                <td>31</td>
-                            </tr>
-                            <tr>
-                                <td>Lisa Chen</td>
-                                <td>San Francisco 49ers</td>
-                                <td>31</td>
-                            </tr>
-                            <tr>
-                                <td>Tom Wilson</td>
-                                <td>Green Bay Packers</td>
-                                <td>31</td>
-                            </tr>
-                            <tr>
-                                <td>Emma Rodriguez</td>
-                                <td>Baltimore Ravens</td>
-                                <td>31</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+            <h3>Team Usage Matrix</h3>
+            <p>Track which teams each player has used.</p>
         </div>
 
-        <!-- Admin Tab (Hidden) -->
+        <!-- Admin Tab -->
         <div id="admin" class="tab-content">
-            <div class="admin-panel">
-                <div class="admin-header">
-                    <h2>🔐 Admin Panel</h2>
-                    <p><em>Only pool administrators should access this section</em></p>
+            <div class="admin-header">
+                <h2>🔐 Admin Panel</h2>
+                <p><strong>Debug Mode Active</strong> - Check console for detailed logs</p>
+            </div>
+
+            <div id="debug-info" class="debug-info">
+                <strong>Debug Info:</strong><br>
+                <span id="debug-text">Loading...</span>
+            </div>
+
+            <div id="message-area"></div>
+
+            <div class="admin-section">
+                <h3>Player Management</h3>
+                <div class="player-management">
+                    <input type="text" id="new-player-name" placeholder="Enter new player name">
+                    <button id="add-player" class="btn btn--primary">Add Player</button>
+                    <button id="test-function" class="btn btn--primary">Test Function</button>
                 </div>
 
-                <div class="admin-section">
-                    <h3>Player Management</h3>
-                    <div class="player-management">
-                        <input type="text" id="new-player-name" placeholder="New player name">
-                        <button id="add-player" class="btn">Add Player</button>
-                    </div>
-                    <div id="player-list">
-                        <div class="player-item">
-                            <span>John Smith</span>
-                            <button class="btn btn--danger btn--sm">Remove</button>
-                        </div>
-                        <div class="player-item">
-                            <span>Sarah Johnson</span>
-                            <button class="btn btn--danger btn--sm">Remove</button>
-                        </div>
-                        <div class="player-item">
-                            <span>Mike Davis</span>
-                            <button class="btn btn--danger btn--sm">Remove</button>
-                        </div>
-                        <div class="player-item">
-                            <span>Lisa Chen</span>
-                            <button class="btn btn--danger btn--sm">Remove</button>
-                        </div>
-                        <div class="player-item">
-                            <span>Tom Wilson</span>
-                            <button class="btn btn--danger btn--sm">Remove</button>
-                        </div>
-                        <div class="player-item">
-                            <span>Emma Rodriguez</span>
-                            <button class="btn btn--danger btn--sm">Remove</button>
-                        </div>
-                    </div>
+                <div id="player-list">
+                    <p>Loading player list...</p>
                 </div>
+            </div>
 
-                <div class="admin-section">
-                    <h3>Game Results</h3>
-                    <div class="results-entry">
-                        <div class="game-result">
-                            <span>Cowboys @ Eagles:</span>
-                            <select>
-                                <option value="">Select Winner</option>
-                                <option value="Cowboys">Cowboys</option>
-                                <option value="Eagles">Eagles</option>
-                            </select>
-                        </div>
-                        <div class="game-result">
-                            <span>Chiefs @ Chargers:</span>
-                            <select>
-                                <option value="">Select Winner</option>
-                                <option value="Chiefs">Chiefs</option>
-                                <option value="Chargers">Chargers</option>
-                            </select>
-                        </div>
-                        <button class="btn btn--primary">Update Results</button>
-                    </div>
+            <div class="admin-section">
+                <h3>Pool Settings</h3>
+                <div class="pool-settings">
+                    <p>
+                        <label>Entry Fee: $
+                            <input type="number" id="entry-fee" value="20" min="1" max="1000" style="width: 100px; margin-left: 10px;">
+                        </label>
+                    </p>
+                    <p>
+                        <label>Current Week: 
+                            <input type="number" id="admin-current-week" value="1" min="1" max="18" style="width: 100px; margin-left: 10px;">
+                        </label>
+                    </p>
+                    <button id="update-settings" class="btn btn--primary">Update Settings</button>
+                    <button id="clear-all-data" class="btn btn--danger">Clear All Data</button>
                 </div>
+            </div>
 
-                <div class="admin-section">
-                    <h3>Pool Settings</h3>
-                    <div class="pool-settings">
-                        <label>Entry Fee: $<input type="number" id="entry-fee" value="20"></label>
-                        <label>Current Week: <input type="number" id="admin-current-week" value="1" min="1" max="18"></label>
-                        <button id="update-settings" class="btn">Update Settings</button>
-                    </div>
-                </div>
+            <div class="admin-section">
+                <h3>Diagnostic Tools</h3>
+                <button id="show-data" class="btn btn--primary">Show Current Data</button>
+                <button id="reset-sample-data" class="btn btn--primary">Reset Sample Data</button>
+                <div id="data-display" style="margin-top: 15px;"></div>
             </div>
         </div>
     </div>
 
-    <script src="app.js"></script>
+    <script>
+        // Enhanced diagnostic JavaScript with extensive logging
+        console.log('🚀 NFL Pick-Em Pool starting up...');
+
+        class DiagnosticPickEmPool {
+            constructor() {
+                console.log('📝 Constructor called');
+                this.debugLog('Starting constructor...');
+
+                this.currentWeek = 1;
+                this.entryFee = 20;
+                this.players = [];
+                this.initialized = false;
+
+                try {
+                    this.loadData();
+                    this.init();
+                    this.checkAdminAccess();
+                    this.initialized = true;
+                    this.debugLog('✅ Initialization complete');
+                } catch (error) {
+                    console.error('❌ Error during initialization:', error);
+                    this.showError('Initialization failed: ' + error.message);
+                }
+            }
+
+            debugLog(message) {
+                console.log('🔍 DEBUG:', message);
+                const debugElement = document.getElementById('debug-text');
+                if (debugElement) {
+                    debugElement.innerHTML += '<br>' + new Date().toLocaleTimeString() + ': ' + message;
+                }
+            }
+
+            showError(message) {
+                console.error('❌ ERROR:', message);
+                const messageArea = document.getElementById('message-area');
+                if (messageArea) {
+                    messageArea.innerHTML = `<div class="error-message"><strong>Error:</strong> ${message}</div>`;
+                }
+            }
+
+            showSuccess(message) {
+                console.log('✅ SUCCESS:', message);
+                const messageArea = document.getElementById('message-area');
+                if (messageArea) {
+                    messageArea.innerHTML = `<div class="success-message"><strong>Success:</strong> ${message}</div>`;
+                    setTimeout(() => {
+                        messageArea.innerHTML = '';
+                    }, 3000);
+                }
+            }
+
+            loadData() {
+                this.debugLog('Loading data from localStorage...');
+                try {
+                    const savedData = localStorage.getItem('nflPickEmData');
+                    if (savedData) {
+                        const data = JSON.parse(savedData);
+                        this.players = data.players || [];
+                        this.currentWeek = data.currentWeek || 1;
+                        this.entryFee = data.entryFee || 20;
+                        this.debugLog(`Loaded ${this.players.length} players from storage`);
+                    } else {
+                        this.debugLog('No saved data found, creating sample data...');
+                        this.createSampleData();
+                    }
+                } catch (error) {
+                    console.error('Error loading data:', error);
+                    this.showError('Could not load data: ' + error.message);
+                    this.createSampleData();
+                }
+            }
+
+            createSampleData() {
+                this.players = [
+                    { name: "John Smith", picks: {}, points: 0 },
+                    { name: "Sarah Johnson", picks: {}, points: 0 },
+                    { name: "Mike Davis", picks: {}, points: 0 },
+                    { name: "Lisa Chen", picks: {}, points: 0 },
+                    { name: "Tom Wilson", picks: {}, points: 0 },
+                    { name: "Emma Rodriguez", picks: {}, points: 0 }
+                ];
+                this.debugLog('Sample data created with ' + this.players.length + ' players');
+                this.saveData();
+            }
+
+            saveData() {
+                try {
+                    const data = {
+                        players: this.players,
+                        currentWeek: this.currentWeek,
+                        entryFee: this.entryFee,
+                        lastUpdate: new Date().toISOString()
+                    };
+                    localStorage.setItem('nflPickEmData', JSON.stringify(data));
+                    this.debugLog('Data saved successfully');
+                    return true;
+                } catch (error) {
+                    console.error('Error saving data:', error);
+                    this.showError('Could not save data: ' + error.message);
+                    return false;
+                }
+            }
+
+            init() {
+                this.debugLog('Initializing UI...');
+                try {
+                    this.bindEvents();
+                    this.updatePoolInfo();
+                    this.refreshPlayerList();
+                    this.debugLog('UI initialized successfully');
+                } catch (error) {
+                    console.error('Error during init:', error);
+                    this.showError('UI initialization failed: ' + error.message);
+                }
+            }
+
+            checkAdminAccess() {
+                this.debugLog('Checking admin access...');
+                const showAdmin = () => {
+                    const adminTab = document.getElementById('admin-tab');
+                    if (adminTab) {
+                        adminTab.style.display = 'inline-block';
+                        this.switchTab('admin');
+
+                        const title = document.getElementById('main-title');
+                        if (title && !title.innerHTML.includes('[ADMIN MODE]')) {
+                            title.innerHTML += ' <span style="font-size: 0.5em; color: #ccc;">[ADMIN MODE]</span>';
+                        }
+                        this.debugLog('Admin mode activated');
+                    }
+                };
+
+                if (window.location.hash === '#admin') {
+                    showAdmin();
+                }
+
+                window.addEventListener('hashchange', () => {
+                    if (window.location.hash === '#admin') {
+                        showAdmin();
+                    } else {
+                        const adminTab = document.getElementById('admin-tab');
+                        if (adminTab) {
+                            adminTab.style.display = 'none';
+                        }
+                        if (document.querySelector('.nav-tab[data-tab="admin"]')?.classList.contains('active')) {
+                            this.switchTab('picks');
+                        }
+                    }
+                });
+            }
+
+            bindEvents() {
+                this.debugLog('Binding events...');
+
+                // Tab navigation
+                document.querySelectorAll('.nav-tab').forEach(tab => {
+                    tab.addEventListener('click', (e) => {
+                        const tabName = e.target.dataset.tab;
+                        this.debugLog(`Tab clicked: ${tabName}`);
+                        this.switchTab(tabName);
+                    });
+                });
+
+                // Add player
+                const addPlayerBtn = document.getElementById('add-player');
+                if (addPlayerBtn) {
+                    addPlayerBtn.addEventListener('click', () => {
+                        this.debugLog('Add player button clicked');
+                        this.addPlayer();
+                    });
+                }
+
+                // Enter key for player name
+                const nameInput = document.getElementById('new-player-name');
+                if (nameInput) {
+                    nameInput.addEventListener('keypress', (e) => {
+                        if (e.key === 'Enter') {
+                            this.debugLog('Enter key pressed in name input');
+                            this.addPlayer();
+                        }
+                    });
+                }
+
+                // Update settings
+                const updateBtn = document.getElementById('update-settings');
+                if (updateBtn) {
+                    updateBtn.addEventListener('click', () => {
+                        this.debugLog('Update settings clicked');
+                        this.updateSettings();
+                    });
+                }
+
+                // Test function
+                const testBtn = document.getElementById('test-function');
+                if (testBtn) {
+                    testBtn.addEventListener('click', () => {
+                        this.debugLog('Test function clicked');
+                        this.testFunction();
+                    });
+                }
+
+                // Clear all data
+                const clearBtn = document.getElementById('clear-all-data');
+                if (clearBtn) {
+                    clearBtn.addEventListener('click', () => {
+                        this.debugLog('Clear all data clicked');
+                        if (confirm('Are you sure you want to clear ALL data? This cannot be undone!')) {
+                            this.clearAllData();
+                        }
+                    });
+                }
+
+                // Diagnostic tools
+                const showDataBtn = document.getElementById('show-data');
+                if (showDataBtn) {
+                    showDataBtn.addEventListener('click', () => {
+                        this.showCurrentData();
+                    });
+                }
+
+                const resetBtn = document.getElementById('reset-sample-data');
+                if (resetBtn) {
+                    resetBtn.addEventListener('click', () => {
+                        this.createSampleData();
+                        this.refreshPlayerList();
+                        this.updatePoolInfo();
+                        this.showSuccess('Sample data reset');
+                    });
+                }
+
+                this.debugLog('Event binding complete');
+            }
+
+            switchTab(tabName) {
+                this.debugLog(`Switching to tab: ${tabName}`);
+
+                // Hide all tabs
+                document.querySelectorAll('.tab-content').forEach(tab => {
+                    tab.classList.remove('active');
+                });
+                document.querySelectorAll('.nav-tab').forEach(tab => {
+                    tab.classList.remove('active');
+                });
+
+                // Show selected tab
+                const targetTab = document.getElementById(tabName);
+                const targetNavTab = document.querySelector(`[data-tab="${tabName}"]`);
+
+                if (targetTab) {
+                    targetTab.classList.add('active');
+                } else {
+                    this.debugLog(`Warning: Tab ${tabName} not found`);
+                }
+
+                if (targetNavTab) {
+                    targetNavTab.classList.add('active');
+                }
+
+                if (tabName === 'admin') {
+                    this.refreshPlayerList();
+                }
+            }
+
+            updatePoolInfo() {
+                this.debugLog('Updating pool info...');
+                try {
+                    const totalPlayers = this.players.length;
+                    const totalPot = totalPlayers * this.entryFee;
+
+                    const elements = {
+                        'pool-size': totalPlayers,
+                        'total-pot': `$${totalPot}`,
+                        'first-prize': `$${Math.floor(totalPot * 0.6)}`,
+                        'second-prize': `$${Math.floor(totalPot * 0.25)}`,
+                        'third-prize': `$${Math.floor(totalPot * 0.15)}`,
+                        'current-week-display': this.currentWeek
+                    };
+
+                    for (const [id, value] of Object.entries(elements)) {
+                        const element = document.getElementById(id);
+                        if (element) {
+                            element.textContent = value;
+                        }
+                    }
+
+                    this.debugLog(`Pool info updated: ${totalPlayers} players, $${totalPot} pot`);
+                } catch (error) {
+                    console.error('Error updating pool info:', error);
+                    this.showError('Could not update pool info');
+                }
+            }
+
+            refreshPlayerList() {
+                this.debugLog('Refreshing player list...');
+                const playerList = document.getElementById('player-list');
+                if (!playerList) {
+                    this.debugLog('Error: player-list element not found');
+                    return;
+                }
+
+                try {
+                    if (this.players.length === 0) {
+                        playerList.innerHTML = '<p><em>No players in pool. Add some players above!</em></p>';
+                        return;
+                    }
+
+                    playerList.innerHTML = '';
+
+                    this.players.forEach((player, index) => {
+                        const playerDiv = document.createElement('div');
+                        playerDiv.className = 'player-item';
+                        playerDiv.innerHTML = `
+                            <span><strong>${player.name}</strong> - ${player.points || 0} points</span>
+                            <button class="btn btn--danger btn--sm remove-player-btn" data-index="${index}">Remove</button>
+                        `;
+                        playerList.appendChild(playerDiv);
+                    });
+
+                    // Add remove button event listeners
+                    document.querySelectorAll('.remove-player-btn').forEach(btn => {
+                        btn.addEventListener('click', (e) => {
+                            const index = parseInt(e.target.dataset.index);
+                            this.debugLog(`Remove button clicked for player ${index}`);
+                            this.removePlayer(index);
+                        });
+                    });
+
+                    this.debugLog(`Player list refreshed with ${this.players.length} players`);
+                } catch (error) {
+                    console.error('Error refreshing player list:', error);
+                    this.showError('Could not refresh player list');
+                }
+            }
+
+            addPlayer() {
+                this.debugLog('Adding player...');
+                const nameInput = document.getElementById('new-player-name');
+                if (!nameInput) {
+                    this.showError('Name input not found');
+                    return;
+                }
+
+                const name = nameInput.value.trim();
+                if (!name) {
+                    this.showError('Please enter a player name');
+                    return;
+                }
+
+                // Check for duplicates
+                if (this.players.some(p => p.name.toLowerCase() === name.toLowerCase())) {
+                    this.showError(`Player "${name}" already exists!`);
+                    return;
+                }
+
+                try {
+                    this.players.push({
+                        name: name,
+                        picks: {},
+                        points: 0
+                    });
+
+                    nameInput.value = '';
+                    this.saveData();
+                    this.refreshPlayerList();
+                    this.updatePoolInfo();
+
+                    this.showSuccess(`${name} added to the pool!`);
+                    this.debugLog(`Player "${name}" added successfully`);
+                } catch (error) {
+                    console.error('Error adding player:', error);
+                    this.showError('Could not add player: ' + error.message);
+                }
+            }
+
+            removePlayer(index) {
+                this.debugLog(`Removing player at index ${index}...`);
+
+                if (index < 0 || index >= this.players.length) {
+                    this.showError('Invalid player index');
+                    return;
+                }
+
+                const player = this.players[index];
+                const confirmMsg = `Are you sure you want to remove "${player.name}" from the pool?`;
+
+                if (confirm(confirmMsg)) {
+                    try {
+                        this.players.splice(index, 1);
+                        this.saveData();
+                        this.refreshPlayerList();
+                        this.updatePoolInfo();
+
+                        this.showSuccess(`${player.name} removed from the pool`);
+                        this.debugLog(`Player "${player.name}" removed successfully`);
+                    } catch (error) {
+                        console.error('Error removing player:', error);
+                        this.showError('Could not remove player: ' + error.message);
+                    }
+                } else {
+                    this.debugLog('Player removal cancelled by user');
+                }
+            }
+
+            updateSettings() {
+                this.debugLog('Updating settings...');
+                try {
+                    const entryFeeInput = document.getElementById('entry-fee');
+                    const weekInput = document.getElementById('admin-current-week');
+
+                    if (entryFeeInput) {
+                        this.entryFee = parseInt(entryFeeInput.value) || 20;
+                    }
+
+                    if (weekInput) {
+                        this.currentWeek = parseInt(weekInput.value) || 1;
+                    }
+
+                    this.saveData();
+                    this.updatePoolInfo();
+                    this.showSuccess('Settings updated successfully!');
+                    this.debugLog('Settings updated');
+                } catch (error) {
+                    console.error('Error updating settings:', error);
+                    this.showError('Could not update settings');
+                }
+            }
+
+            clearAllData() {
+                this.debugLog('Clearing all data...');
+                try {
+                    localStorage.removeItem('nflPickEmData');
+                    this.players = [];
+                    this.currentWeek = 1;
+                    this.entryFee = 20;
+                    this.refreshPlayerList();
+                    this.updatePoolInfo();
+                    this.showSuccess('All data cleared!');
+                    this.debugLog('All data cleared successfully');
+                } catch (error) {
+                    console.error('Error clearing data:', error);
+                    this.showError('Could not clear data');
+                }
+            }
+
+            testFunction() {
+                this.debugLog('Testing function called!');
+                try {
+                    this.showSuccess('Test function works! All systems operational.');
+                    console.log('Current players:', this.players);
+                    console.log('Current week:', this.currentWeek);
+                    console.log('Entry fee:', this.entryFee);
+                    console.log('Initialized:', this.initialized);
+                } catch (error) {
+                    this.showError('Test function failed: ' + error.message);
+                }
+            }
+
+            showCurrentData() {
+                const dataDisplay = document.getElementById('data-display');
+                if (dataDisplay) {
+                    const data = {
+                        players: this.players,
+                        currentWeek: this.currentWeek,
+                        entryFee: this.entryFee,
+                        initialized: this.initialized
+                    };
+                    dataDisplay.innerHTML = `<pre style="background: #f8f9fa; padding: 15px; border-radius: 5px; overflow: auto;">${JSON.stringify(data, null, 2)}</pre>`;
+                }
+            }
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('🏈 Page loaded, initializing app...');
+            try {
+                window.pickemPool = new DiagnosticPickEmPool();
+            } catch (error) {
+                console.error('❌ Failed to initialize app:', error);
+                alert('Failed to initialize the app. Check the console for details.');
+            }
+        });
+
+        // Global error handler
+        window.addEventListener('error', (event) => {
+            console.error('🚨 Global error caught:', event.error);
+        });
+    </script>
 </body>
 </html>
