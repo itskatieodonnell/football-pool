@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NFL Pick 'Em Pool Manager 2025 - Professional Edition</title>
+    <title>NFL Pick 'Em Pool Manager 2025 - Fixed Version</title>
     <style>
-        /* Professional NFL Pick-Em Pool Styles */
+        /* Professional NFL Pick-Em Pool Styles - Fixed Version */
         :root {
             --nfl-blue: #013369;
             --nfl-red: #D50A0A;
@@ -30,6 +30,40 @@
         }
 
         .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+
+        /* Notification System - Better than alerts */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            z-index: 1000;
+            max-width: 400px;
+            animation: slideIn 0.3s ease-out;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+        .notification.success {
+            background: var(--success-green);
+            color: white;
+        }
+
+        .notification.error {
+            background: var(--danger-red);
+            color: white;
+        }
+
+        .notification.info {
+            background: var(--nfl-blue);
+            color: white;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
 
         /* Header */
         .header {
@@ -165,198 +199,6 @@
             color: white;
         }
 
-        /* Games Interface */
-        .games-section {
-            margin-bottom: 30px;
-        }
-
-        .player-selector {
-            background: var(--bg-light);
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 25px;
-        }
-
-        .player-selector label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 10px;
-            color: var(--nfl-blue);
-        }
-
-        .player-selector select {
-            width: 100%;
-            max-width: 400px;
-            padding: 12px 15px;
-            font-size: 1.1em;
-            border: 2px solid var(--border-color);
-            border-radius: 8px;
-            background-color: white;
-            transition: border-color 0.3s ease;
-        }
-
-        .player-selector select:focus {
-            outline: none;
-            border-color: var(--nfl-blue);
-            box-shadow: 0 0 0 3px rgba(1,51,105,0.1);
-        }
-
-        .games-grid {
-            display: grid;
-            gap: 20px;
-        }
-
-        .game-card {
-            border: 2px solid var(--border-color);
-            border-radius: 12px;
-            padding: 20px;
-            transition: all 0.3s ease;
-            background: white;
-        }
-
-        .game-card:hover {
-            border-color: var(--nfl-blue);
-            box-shadow: 0 8px 25px rgba(1,51,105,0.15);
-            transform: translateY(-2px);
-        }
-
-        .game-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .game-time {
-            font-size: 0.9em;
-            color: var(--nfl-silver);
-            font-weight: bold;
-        }
-
-        .game-network {
-            background: var(--nfl-blue);
-            color: white;
-            padding: 4px 10px;
-            border-radius: 15px;
-            font-size: 0.8em;
-            font-weight: bold;
-        }
-
-        .matchup {
-            text-align: center;
-            margin: 20px 0;
-        }
-
-        .team-line {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 0;
-        }
-
-        .team-name {
-            font-size: 1.1em;
-            font-weight: bold;
-        }
-
-        .pick-options {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .pick-btn {
-            padding: 12px 25px;
-            border: 3px solid var(--nfl-blue);
-            background: white;
-            color: var(--nfl-blue);
-            font-weight: bold;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 1em;
-            min-width: 100px;
-        }
-
-        .pick-btn:hover:not(.disabled) {
-            background: var(--nfl-blue);
-            color: white;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(1,51,105,0.3);
-        }
-
-        .pick-btn.selected {
-            background: var(--success-green);
-            border-color: var(--success-green);
-            color: white;
-            box-shadow: 0 0 20px rgba(40,167,69,0.4);
-        }
-
-        .pick-btn.disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-            background: #f8f9fa;
-            color: #6c757d;
-            border-color: #e9ecef;
-        }
-
-        .game-result {
-            text-align: center;
-            padding: 10px;
-            margin-top: 15px;
-            border-radius: 8px;
-            font-weight: bold;
-        }
-
-        .game-result.winner {
-            background: var(--success-green);
-            color: white;
-        }
-
-        .game-result.in-progress {
-            background: var(--warning-orange);
-            color: var(--text-dark);
-        }
-
-        /* Constraints Display */
-        .constraints-section {
-            background: var(--bg-light);
-            padding: 25px;
-            border-radius: 12px;
-            margin-top: 30px;
-        }
-
-        .constraints-section h4 {
-            color: var(--nfl-blue);
-            margin-bottom: 15px;
-            font-size: 1.2em;
-        }
-
-        .used-teams {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .used-team {
-            background: var(--danger-red);
-            color: white;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 0.9em;
-            font-weight: bold;
-        }
-
-        .remaining-count {
-            margin-top: 15px;
-            font-size: 1.1em;
-            color: var(--success-green);
-            font-weight: bold;
-        }
-
         /* Buttons */
         .btn {
             padding: 12px 25px;
@@ -414,11 +256,6 @@
             color: white;
         }
 
-        .btn--lg {
-            padding: 15px 35px;
-            font-size: 1.2em;
-        }
-
         .btn--sm {
             padding: 8px 16px;
             font-size: 0.9em;
@@ -428,6 +265,101 @@
             opacity: 0.5;
             cursor: not-allowed;
             transform: none !important;
+        }
+
+        /* Form Elements */
+        .form-row {
+            display: flex;
+            gap: 15px;
+            align-items: end;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .form-group {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: var(--text-dark);
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 2px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 1em;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--nfl-blue);
+            box-shadow: 0 0 0 3px rgba(1,51,105,0.1);
+        }
+
+        /* Admin Styles */
+        .admin-header {
+            background: linear-gradient(135deg, var(--nfl-blue), #041E42);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .admin-section {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .admin-section h3 {
+            color: var(--nfl-blue);
+            margin-bottom: 20px;
+            font-size: 1.3em;
+            border-bottom: 2px solid var(--bg-light);
+            padding-bottom: 10px;
+        }
+
+        .player-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background: var(--bg-light);
+            border-radius: 8px;
+            margin-bottom: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .player-item:hover {
+            background: #e9ecef;
+        }
+
+        .player-info {
+            flex: 1;
+        }
+
+        .player-name {
+            font-weight: bold;
+            color: var(--nfl-blue);
+            font-size: 1.1em;
+        }
+
+        .player-stats {
+            color: var(--nfl-silver);
+            font-size: 0.9em;
+            margin-top: 2px;
         }
 
         /* Tables */
@@ -479,127 +411,12 @@
             color: var(--success-green);
         }
 
-        /* Admin Styles */
-        .admin-header {
-            background: linear-gradient(135deg, var(--nfl-blue), #041E42);
-            color: white;
-            padding: 25px;
-            border-radius: 12px;
-            margin-bottom: 30px;
+        /* Loading States */
+        .loading {
             text-align: center;
-        }
-
-        .admin-section {
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-            margin-bottom: 25px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-        }
-
-        .admin-section h3 {
-            color: var(--nfl-blue);
-            margin-bottom: 20px;
-            font-size: 1.3em;
-            border-bottom: 2px solid var(--bg-light);
-            padding-bottom: 10px;
-        }
-
-        .form-row {
-            display: flex;
-            gap: 15px;
-            align-items: end;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-
-        .form-group {
-            flex: 1;
-            min-width: 200px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-            color: var(--text-dark);
-        }
-
-        .form-group input,
-        .form-group select {
-            width: 100%;
-            padding: 10px 12px;
-            border: 2px solid var(--border-color);
-            border-radius: 6px;
-            font-size: 1em;
-            transition: border-color 0.3s ease;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: var(--nfl-blue);
-            box-shadow: 0 0 0 3px rgba(1,51,105,0.1);
-        }
-
-        .player-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 20px;
-            background: var(--bg-light);
-            border-radius: 8px;
-            margin-bottom: 10px;
-            transition: background-color 0.3s ease;
-        }
-
-        .player-item:hover {
-            background: #e9ecef;
-        }
-
-        .player-info {
-            flex: 1;
-        }
-
-        .player-name {
-            font-weight: bold;
-            color: var(--nfl-blue);
-            font-size: 1.1em;
-        }
-
-        .player-stats {
+            padding: 40px;
             color: var(--nfl-silver);
-            font-size: 0.9em;
-            margin-top: 2px;
-        }
-
-        /* Status Indicators */
-        .status-badge {
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 0.8em;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-
-        .status-badge.upcoming {
-            background: var(--success-green);
-            color: white;
-        }
-
-        .status-badge.locked {
-            background: var(--danger-red);
-            color: white;
-        }
-
-        .status-badge.in-progress {
-            background: var(--warning-orange);
-            color: var(--text-dark);
-        }
-
-        .status-badge.completed {
-            background: var(--nfl-silver);
-            color: white;
+            font-style: italic;
         }
 
         /* Responsive Design */
@@ -610,58 +427,21 @@
             .nav-tabs { flex-direction: column; }
             .nav-tab { margin-bottom: 5px; }
             .week-controls { flex-direction: column; text-align: center; }
-            .pick-options { flex-direction: column; }
-            .pick-btn { width: 100%; }
             .form-row { flex-direction: column; }
             .player-item { flex-direction: column; gap: 10px; text-align: center; }
+            .notification { right: 10px; left: 10px; max-width: none; }
         }
 
-        /* Loading States */
-        .loading {
-            text-align: center;
-            padding: 40px;
-            color: var(--nfl-silver);
-            font-style: italic;
-        }
-
-        .loading::after {
-            content: "...";
-            animation: dots 1.5s steps(5, end) infinite;
-        }
-
-        @keyframes dots {
-            0%, 20% { color: rgba(0,0,0,0); text-shadow: .25em 0 0 rgba(0,0,0,0), .5em 0 0 rgba(0,0,0,0); }
-            40% { color: var(--nfl-silver); text-shadow: .25em 0 0 rgba(0,0,0,0), .5em 0 0 rgba(0,0,0,0); }
-            60% { text-shadow: .25em 0 0 var(--nfl-silver), .5em 0 0 rgba(0,0,0,0); }
-            80%, 100% { text-shadow: .25em 0 0 var(--nfl-silver), .5em 0 0 var(--nfl-silver); }
-        }
-
-        /* Animations */
-        .fade-in {
-            animation: fadeIn 0.5s ease-in;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .pulse {
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
+        /* Hide initially until loaded */
+        .tab-content { opacity: 0; transition: opacity 0.3s ease; }
+        .tab-content.active { opacity: 1; }
     </style>
 </head>
 <body>
     <div class="container">
         <!-- Header -->
         <header class="header">
-            <h1 id="main-title">🏈 2025 NFL Pick 'Em Pool - Professional Edition</h1>
+            <h1 id="main-title">🏈 2025 NFL Pick 'Em Pool</h1>
             <div class="season-info">
                 <div class="info-card">
                     <div class="info-label">Pool Size</div>
@@ -685,7 +465,6 @@
         <!-- Week Status Banner -->
         <div id="week-status" class="week-status">
             <span id="status-text">Week 1 - Picks Open</span>
-            <span id="deadline-countdown"></span>
         </div>
 
         <!-- Navigation -->
@@ -693,7 +472,6 @@
             <button class="nav-tab active" data-tab="picks">Weekly Picks</button>
             <button class="nav-tab" data-tab="standings">Standings</button>
             <button class="nav-tab" data-tab="team-tracker">Team Tracker</button>
-            <button class="nav-tab" data-tab="schedule">Full Schedule</button>
             <button class="nav-tab" data-tab="admin" id="admin-tab" style="display: none;">Admin</button>
         </nav>
 
@@ -714,36 +492,17 @@
                 </div>
             </div>
 
-            <div class="games-section">
-                <div class="player-selector">
-                    <label for="current-player">Select Player to Make Pick:</label>
-                    <select id="current-player">
-                        <option value="">Choose a player...</option>
-                    </select>
-                </div>
+            <div class="form-group" style="max-width: 400px; margin-bottom: 30px;">
+                <label for="current-player">Select Player to Make Pick:</label>
+                <select id="current-player">
+                    <option value="">Choose a player...</option>
+                </select>
+            </div>
 
-                <div id="games-container">
-                    <div id="games-grid" class="games-grid">
-                        <div class="loading">Loading games for this week</div>
-                    </div>
-                </div>
-
-                <div id="constraints-section" class="constraints-section" style="display: none;">
-                    <h4>Team Constraints for <span id="selected-player-name"></span></h4>
-                    <div>
-                        <strong>Teams Already Used:</strong>
-                        <div class="used-teams" id="used-teams-display">
-                            <em>Select a player to see their constraints</em>
-                        </div>
-                    </div>
-                    <div class="remaining-count" id="remaining-teams-count"></div>
-                </div>
-
-                <div style="text-align: center; margin-top: 30px;">
-                    <button id="submit-pick" class="btn btn--success btn--lg" style="display: none;">
-                        Submit Pick for Week <span id="submit-week-number">1</span>
-                    </button>
-                </div>
+            <div id="games-display">
+                <p style="text-align: center; color: var(--nfl-silver); padding: 40px;">
+                    Select a player above to see games and make picks for Week <span id="display-week-number">1</span>.
+                </p>
             </div>
         </div>
 
@@ -758,7 +517,7 @@
                             <th>Player</th>
                             <th>Points</th>
                             <th>W-L Record</th>
-                            <th>Last Pick</th>
+                            <th>Teams Used</th>
                             <th>Teams Remaining</th>
                         </tr>
                     </thead>
@@ -778,15 +537,7 @@
                 Track which teams each player has used throughout the season.
             </p>
             <div id="team-matrix-container">
-                <div class="loading">Loading team usage data...</div>
-            </div>
-        </div>
-
-        <!-- Full Schedule Tab -->
-        <div id="schedule" class="tab-content">
-            <h2>2025 NFL Season Schedule</h2>
-            <div id="schedule-container">
-                <div class="loading">Loading full season schedule...</div>
+                <div class="loading">Select "Admin" to manage team constraints</div>
             </div>
         </div>
 
@@ -794,7 +545,7 @@
         <div id="admin" class="tab-content">
             <div class="admin-header">
                 <h2>🔐 Pool Administration</h2>
-                <p>Complete control panel for managing your NFL Pick 'Em Pool</p>
+                <p>Manage your NFL Pick 'Em Pool</p>
             </div>
 
             <!-- Player Management -->
@@ -814,7 +565,7 @@
 
             <!-- Week Management -->
             <div class="admin-section">
-                <h3>Week & Game Management</h3>
+                <h3>Week Management</h3>
                 <div class="form-row">
                     <div class="form-group">
                         <label for="admin-current-week">Current Week</label>
@@ -839,36 +590,8 @@
                             <option value="18">Week 18</option>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label for="week-status-select">Week Status</label>
-                        <select id="week-status-select">
-                            <option value="upcoming">Upcoming (Picks Open)</option>
-                            <option value="locked">Locked (No More Picks)</option>
-                            <option value="in_progress">In Progress (Games Started)</option>
-                            <option value="completed">Completed (All Results In)</option>
-                        </select>
-                    </div>
                     <button id="update-week" class="btn btn--primary">Update Week</button>
-                </div>
-
-                <div class="form-row">
-                    <button id="lock-picks" class="btn btn--danger">Lock All Picks</button>
-                    <button id="unlock-picks" class="btn btn--success">Unlock Picks</button>
-                    <button id="advance-week" class="btn btn--primary">Advance to Next Week</button>
-                </div>
-            </div>
-
-            <!-- Game Results -->
-            <div class="admin-section">
-                <h3>Game Results Entry</h3>
-                <p style="margin-bottom: 20px; color: var(--nfl-silver);">
-                    Enter winners for Week <span id="results-week-number">1</span> games:
-                </p>
-                <div id="results-container">
-                    <div class="loading">Loading games for results entry...</div>
-                </div>
-                <div style="text-align: center; margin-top: 20px;">
-                    <button id="save-results" class="btn btn--success btn--lg">Save Results & Calculate Points</button>
+                    <button id="advance-week" class="btn btn--success">Advance to Next Week</button>
                 </div>
             </div>
 
@@ -880,51 +603,33 @@
                         <label for="entry-fee">Entry Fee ($)</label>
                         <input type="number" id="entry-fee" value="20" min="1" max="1000">
                     </div>
-                    <div class="form-group">
-                        <label for="pool-name">Pool Name</label>
-                        <input type="text" id="pool-name" value="12th Annual Pick 'Em Pool">
-                    </div>
                     <button id="update-settings" class="btn btn--primary">Update Settings</button>
                 </div>
 
                 <div class="form-row">
-                    <button id="reset-season" class="btn btn--danger">Reset Entire Season</button>
-                    <button id="backup-data" class="btn btn--outline">Backup Pool Data</button>
-                    <button id="restore-data" class="btn btn--outline">Restore From Backup</button>
-                </div>
-            </div>
-
-            <!-- System Status -->
-            <div class="admin-section">
-                <h3>System Status</h3>
-                <div id="system-status">
-                    <p><strong>Last Updated:</strong> <span id="last-updated">Never</span></p>
-                    <p><strong>Total Picks Made:</strong> <span id="total-picks">0</span></p>
-                    <p><strong>Data Storage:</strong> <span id="storage-status">OK</span></p>
+                    <button id="reset-pool" class="btn btn--danger">Reset Entire Pool</button>
+                    <button id="clear-picks" class="btn btn--outline">Clear All Picks</button>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        // Professional NFL Pick-Em Pool Management System
-        console.log('🏈 NFL Pick-Em Pool Professional Edition Starting...');
+        // Fixed NFL Pick-Em Pool System (No Annoying Pop-ups!)
+        console.log('🏈 NFL Pick-Em Pool Fixed Version Loading...');
 
-        class ProfessionalPickEmPool {
+        class FixedPickEmPool {
             constructor() {
-                this.version = "2.0.0";
                 this.currentWeek = 1;
                 this.maxWeeks = 18;
                 this.entryFee = 20;
-                this.poolName = "12th Annual Pick 'Em Pool";
                 this.players = [];
-                this.selectedTeam = null;
-                this.selectedPlayer = null;
+                this.notificationTimeout = null;
 
-                // NFL Schedule data structure
-                this.nflSchedule = this.initializeSchedule();
+                // Prevent multiple initialization
+                if (window.poolInitialized) return;
+                window.poolInitialized = true;
 
-                console.log('📊 Initializing Professional Pick-Em Pool System v' + this.version);
                 this.init();
             }
 
@@ -934,85 +639,50 @@
                     this.bindEvents();
                     this.checkAdminAccess();
                     this.updateUI();
-                    this.startCountdownTimer();
-                    console.log('✅ System initialized successfully');
+                    console.log('✅ System loaded successfully (no annoying pop-ups!)');
                 } catch (error) {
-                    console.error('❌ Initialization failed:', error);
-                    this.showError('System initialization failed. Please refresh the page.');
+                    console.error('❌ Initialization error:', error);
                 }
             }
 
-            initializeSchedule() {
-                // Initialize with Week 1 data - in production this would load from your JSON file
-                return {
-                    1: {
-                        week_number: 1,
-                        start_date: "2025-09-04",
-                        end_date: "2025-09-08", 
-                        pick_deadline: "2025-09-04T19:20:00",
-                        status: "upcoming",
-                        games: [
-                            {
-                                game_id: "week1_game1",
-                                away_team: "Dallas Cowboys",
-                                home_team: "Philadelphia Eagles", 
-                                date: "Thursday, Sep 4",
-                                time: "8:20 PM ET",
-                                network: "NBC",
-                                location: "Philadelphia, PA",
-                                game_status: "scheduled",
-                                winner: null
-                            },
-                            {
-                                game_id: "week1_game2",
-                                away_team: "Kansas City Chiefs",
-                                home_team: "Los Angeles Chargers",
-                                date: "Friday, Sep 5", 
-                                time: "8:00 PM ET",
-                                network: "YouTube",
-                                location: "São Paulo, Brazil",
-                                game_status: "scheduled", 
-                                winner: null
-                            },
-                            {
-                                game_id: "week1_game3",
-                                away_team: "Baltimore Ravens",
-                                home_team: "Buffalo Bills",
-                                date: "Sunday, Sep 7",
-                                time: "8:20 PM ET",
-                                network: "NBC",
-                                location: "Buffalo, NY",
-                                game_status: "scheduled",
-                                winner: null
-                            },
-                            {
-                                game_id: "week1_game4",
-                                away_team: "Minnesota Vikings", 
-                                home_team: "Chicago Bears",
-                                date: "Monday, Sep 8",
-                                time: "8:15 PM ET",
-                                network: "ABC/ESPN",
-                                location: "Chicago, IL",
-                                game_status: "scheduled",
-                                winner: null
-                            }
-                        ]
-                    }
-                };
+            // BETTER notification system - no more pop-ups!
+            showNotification(message, type = 'info') {
+                // Remove any existing notification
+                const existing = document.querySelector('.notification');
+                if (existing) {
+                    existing.remove();
+                }
+
+                // Create new notification
+                const notification = document.createElement('div');
+                notification.className = `notification ${type}`;
+                notification.textContent = message;
+                document.body.appendChild(notification);
+
+                // Auto-remove after 3 seconds
+                if (this.notificationTimeout) {
+                    clearTimeout(this.notificationTimeout);
+                }
+                this.notificationTimeout = setTimeout(() => {
+                    notification.remove();
+                }, 3000);
+
+                console.log(`📢 ${type.toUpperCase()}: ${message}`);
             }
 
             loadData() {
-                const savedData = localStorage.getItem('nflPickEmPoolPro');
+                const savedData = localStorage.getItem('nflPickEmPoolFixed');
                 if (savedData) {
-                    const data = JSON.parse(savedData);
-                    this.players = data.players || [];
-                    this.currentWeek = data.currentWeek || 1;
-                    this.entryFee = data.entryFee || 20;
-                    this.poolName = data.poolName || "12th Annual Pick 'Em Pool";
-                    if (data.nflSchedule) {
-                        this.nflSchedule = { ...this.nflSchedule, ...data.nflSchedule };
+                    try {
+                        const data = JSON.parse(savedData);
+                        this.players = data.players || [];
+                        this.currentWeek = data.currentWeek || 1;
+                        this.entryFee = data.entryFee || 20;
+                        console.log(`📁 Loaded: ${this.players.length} players, Week ${this.currentWeek}`);
+                    } catch (error) {
+                        console.error('Error loading saved data:', error);
+                        this.createSampleData();
                     }
-                    console.log(`📁 Loaded data: ${this.players.length} players, Week ${this.currentWeek}`);
                 } else {
                     this.createSampleData();
                 }
@@ -1023,26 +693,26 @@
                     { 
                         id: 1, 
                         name: "John Smith", 
-                        picks: { week1: "Kansas City Chiefs" }, 
+                        picks: {}, 
                         points: 0,
                         record: { wins: 0, losses: 0 }
                     },
                     { 
                         id: 2, 
                         name: "Sarah Johnson", 
-                        picks: { week1: "Buffalo Bills" }, 
+                        picks: {}, 
                         points: 0,
                         record: { wins: 0, losses: 0 }
                     },
                     { 
                         id: 3, 
                         name: "Mike Davis", 
-                        picks: { week1: "Philadelphia Eagles" }, 
+                        picks: {}, 
                         points: 0,
                         record: { wins: 0, losses: 0 }
                     }
                 ];
-                console.log('📝 Created sample data with', this.players.length, 'players');
+                console.log('📝 Created sample data');
                 this.saveData();
             }
 
@@ -1052,22 +722,22 @@
                         players: this.players,
                         currentWeek: this.currentWeek,
                         entryFee: this.entryFee,
-                        poolName: this.poolName,
-                        nflSchedule: this.nflSchedule,
-                        lastUpdated: new Date().toISOString(),
-                        version: this.version
+                        lastUpdated: new Date().toISOString()
                     };
-                    localStorage.setItem('nflPickEmPoolPro', JSON.stringify(data));
-                    document.getElementById('last-updated').textContent = new Date().toLocaleString();
+                    localStorage.setItem('nflPickEmPoolFixed', JSON.stringify(data));
                     return true;
                 } catch (error) {
-                    console.error('💾 Save failed:', error);
-                    this.showError('Failed to save data. Your changes may be lost.');
+                    console.error('💾 Save error:', error);
+                    this.showNotification('Failed to save data', 'error');
                     return false;
                 }
             }
 
             bindEvents() {
+                // Prevent multiple event binding
+                if (this.eventsBound) return;
+                this.eventsBound = true;
+
                 // Tab navigation
                 document.querySelectorAll('.nav-tab').forEach(tab => {
                     tab.addEventListener('click', (e) => {
@@ -1098,34 +768,26 @@
                 });
 
                 document.getElementById('update-week')?.addEventListener('click', () => {
-                    this.updateWeekStatus();
+                    this.updateCurrentWeek();
                 });
 
                 document.getElementById('advance-week')?.addEventListener('click', () => {
                     this.advanceWeek();
                 });
 
-                document.getElementById('lock-picks')?.addEventListener('click', () => {
-                    this.lockPicks();
-                });
-
-                document.getElementById('unlock-picks')?.addEventListener('click', () => {
-                    this.unlockPicks();
-                });
-
-                document.getElementById('save-results')?.addEventListener('click', () => {
-                    this.saveGameResults();
-                });
-
-                document.getElementById('submit-pick')?.addEventListener('click', () => {
-                    this.submitPick();
-                });
-
                 document.getElementById('update-settings')?.addEventListener('click', () => {
-                    this.updatePoolSettings();
+                    this.updateSettings();
                 });
 
-                console.log('🔗 Event handlers bound successfully');
+                document.getElementById('reset-pool')?.addEventListener('click', () => {
+                    this.resetPool();
+                });
+
+                document.getElementById('clear-picks')?.addEventListener('click', () => {
+                    this.clearAllPicks();
+                });
+
+                console.log('🔗 Events bound successfully');
             }
 
             checkAdminAccess() {
@@ -1136,8 +798,8 @@
                         this.switchTab('admin');
 
                         const title = document.getElementById('main-title');
-                        if (title && !title.innerHTML.includes('[ADMIN MODE]')) {
-                            title.innerHTML += ' <span style="font-size: 0.6em; opacity: 0.7;">[ADMIN MODE]</span>';
+                        if (title && !title.innerHTML.includes('[ADMIN]')) {
+                            title.innerHTML += ' <span style="font-size: 0.6em; opacity: 0.7;">[ADMIN]</span>';
                         }
                     }
                 };
@@ -1151,9 +813,7 @@
                         showAdmin();
                     } else {
                         const adminTab = document.getElementById('admin-tab');
-                        if (adminTab) {
-                            adminTab.style.display = 'none';
-                        }
+                        if (adminTab) adminTab.style.display = 'none';
                         if (document.querySelector('.nav-tab[data-tab="admin"]')?.classList.contains('active')) {
                             this.switchTab('picks');
                         }
@@ -1174,31 +834,14 @@
                 const targetTab = document.getElementById(tabName);
                 const targetNavTab = document.querySelector(`[data-tab="${tabName}"]`);
 
-                if (targetTab) {
-                    targetTab.classList.add('active');
-                    targetTab.classList.add('fade-in');
-                }
-                if (targetNavTab) {
-                    targetNavTab.classList.add('active');
-                }
+                if (targetTab) targetTab.classList.add('active');
+                if (targetNavTab) targetNavTab.classList.add('active');
 
                 // Update content based on tab
-                switch(tabName) {
-                    case 'picks':
-                        this.renderWeeklyPicks();
-                        break;
-                    case 'standings':
-                        this.renderStandings();
-                        break;
-                    case 'team-tracker':
-                        this.renderTeamTracker();
-                        break;
-                    case 'schedule':
-                        this.renderFullSchedule();
-                        break;
-                    case 'admin':
-                        this.renderAdminPanel();
-                        break;
+                if (tabName === 'standings') {
+                    this.renderStandings();
+                } else if (tabName === 'admin') {
+                    this.renderAdminPanel();
                 }
             }
 
@@ -1206,7 +849,7 @@
                 this.updatePoolInfo();
                 this.updateWeekStatus();
                 this.updatePlayerDropdown();
-                this.renderWeeklyPicks();
+                this.updateWeekDisplay();
             }
 
             updatePoolInfo() {
@@ -1217,52 +860,15 @@
                 document.getElementById('total-pot').textContent = `$${totalPot}`;
                 document.getElementById('current-week-display').textContent = `Week ${this.currentWeek}`;
                 document.getElementById('season-progress').textContent = `Week ${this.currentWeek} of ${this.maxWeeks}`;
-
-                // Update prize structure
-                const firstPrize = Math.floor(totalPot * 0.6);
-                const secondPrize = Math.floor(totalPot * 0.25);
-                const thirdPrize = Math.floor(totalPot * 0.15);
             }
 
             updateWeekStatus() {
-                const weekData = this.nflSchedule[this.currentWeek];
-                if (!weekData) return;
-
                 const statusElement = document.getElementById('week-status');
                 const statusText = document.getElementById('status-text');
-                const weekTitle = document.getElementById('week-title');
-                const pickDeadline = document.getElementById('pick-deadline');
 
                 if (statusElement && statusText) {
-                    statusElement.className = 'week-status ' + weekData.status;
-
-                    const statusMessages = {
-                        upcoming: `Week ${this.currentWeek} - Picks Open`,
-                        locked: `Week ${this.currentWeek} - Picks Locked`,
-                        in_progress: `Week ${this.currentWeek} - Games In Progress`,
-                        completed: `Week ${this.currentWeek} - Week Complete`
-                    };
-
-                    statusText.textContent = statusMessages[weekData.status] || statusMessages.upcoming;
-                }
-
-                if (weekTitle) {
-                    weekTitle.textContent = `Week ${this.currentWeek}`;
-                }
-
-                if (pickDeadline && weekData.pick_deadline) {
-                    const deadline = new Date(weekData.pick_deadline);
-                    pickDeadline.textContent = `Picks due: ${deadline.toLocaleDateString('en-US', { 
-                        weekday: 'long', 
-                        month: 'short', 
-                        day: 'numeric' 
-                    })} at ${deadline.toLocaleTimeString('en-US', { 
-                        hour: 'numeric', 
-                        minute: '2-digit',
-                        timeZoneName: 'short'
-                    })}`;
-
-                    pickDeadline.className = 'deadline-info ' + weekData.status;
+                    statusText.textContent = `Week ${this.currentWeek} - Picks Open`;
+                    statusElement.className = 'week-status upcoming';
                 }
             }
 
@@ -1280,191 +886,65 @@
                 });
             }
 
-            renderWeeklyPicks() {
-                const weekData = this.nflSchedule[this.currentWeek];
-                if (!weekData || !weekData.games) {
-                    document.getElementById('games-grid').innerHTML = '<div class="loading">No games available for this week</div>';
-                    return;
-                }
-
-                const gamesGrid = document.getElementById('games-grid');
-                gamesGrid.innerHTML = '';
-
-                weekData.games.forEach(game => {
-                    const gameCard = this.createGameCard(game);
-                    gamesGrid.appendChild(gameCard);
-                });
-            }
-
-            createGameCard(game) {
-                const card = document.createElement('div');
-                card.className = 'game-card';
-                card.innerHTML = `
-                    <div class="game-header">
-                        <span class="game-time">${game.date} • ${game.time}</span>
-                        <span class="game-network">${game.network}</span>
-                    </div>
-                    <div class="matchup">
-                        <div class="team-line">
-                            <span class="team-name">${game.away_team}</span>
-                            <span style="color: var(--nfl-silver);">@</span>
-                        </div>
-                        <div class="team-line">
-                            <span class="team-name">${game.home_team}</span>
-                            <span style="font-size: 0.9em; color: var(--nfl-silver);">${game.location}</span>
-                        </div>
-                    </div>
-                    <div class="pick-options">
-                        <button class="pick-btn" data-team="${game.away_team}" data-game="${game.game_id}">
-                            ${this.getTeamAbbr(game.away_team)}
-                        </button>
-                        <button class="pick-btn" data-team="${game.home_team}" data-game="${game.game_id}">
-                            ${this.getTeamAbbr(game.home_team)}
-                        </button>
-                    </div>
-                    ${game.winner ? `<div class="game-result winner">Winner: ${game.winner}</div>` : ''}
-                `;
-
-                // Add event listeners to pick buttons
-                card.querySelectorAll('.pick-btn').forEach(btn => {
-                    btn.addEventListener('click', (e) => {
-                        this.selectTeamPick(e.target);
-                    });
-                });
-
-                return card;
-            }
-
-            getTeamAbbr(teamName) {
-                const abbrs = {
-                    'Arizona Cardinals': 'ARI', 'Atlanta Falcons': 'ATL', 'Baltimore Ravens': 'BAL',
-                    'Buffalo Bills': 'BUF', 'Carolina Panthers': 'CAR', 'Chicago Bears': 'CHI',
-                    'Cincinnati Bengals': 'CIN', 'Cleveland Browns': 'CLE', 'Dallas Cowboys': 'DAL',
-                    'Denver Broncos': 'DEN', 'Detroit Lions': 'DET', 'Green Bay Packers': 'GB',
-                    'Houston Texans': 'HOU', 'Indianapolis Colts': 'IND', 'Jacksonville Jaguars': 'JAX',
-                    'Kansas City Chiefs': 'KC', 'Las Vegas Raiders': 'LV', 'Los Angeles Chargers': 'LAC',
-                    'Los Angeles Rams': 'LAR', 'Miami Dolphins': 'MIA', 'Minnesota Vikings': 'MIN',
-                    'New England Patriots': 'NE', 'New Orleans Saints': 'NO', 'New York Giants': 'NYG',
-                    'New York Jets': 'NYJ', 'Philadelphia Eagles': 'PHI', 'Pittsburgh Steelers': 'PIT',
-                    'San Francisco 49ers': 'SF', 'Seattle Seahawks': 'SEA', 'Tampa Bay Buccaneers': 'TB',
-                    'Tennessee Titans': 'TEN', 'Washington Commanders': 'WSH'
-                };
-                return abbrs[teamName] || teamName.substring(0, 3).toUpperCase();
+            updateWeekDisplay() {
+                document.getElementById('week-title').textContent = `Week ${this.currentWeek}`;
+                document.getElementById('display-week-number').textContent = this.currentWeek;
+                document.getElementById('admin-current-week').value = this.currentWeek;
             }
 
             selectPlayer(playerId) {
                 if (!playerId) {
-                    document.getElementById('constraints-section').style.display = 'none';
-                    document.getElementById('submit-pick').style.display = 'none';
-                    this.selectedPlayer = null;
+                    document.getElementById('games-display').innerHTML = 
+                        `<p style="text-align: center; color: var(--nfl-silver); padding: 40px;">
+                            Select a player above to see games and make picks for Week ${this.currentWeek}.
+                        </p>`;
                     return;
                 }
 
                 const player = this.players.find(p => p.id == playerId);
                 if (!player) return;
 
-                this.selectedPlayer = player;
-                this.updatePlayerConstraints(player);
-                this.updatePickButtons(player);
-
-                document.getElementById('constraints-section').style.display = 'block';
-                document.getElementById('selected-player-name').textContent = player.name;
-                document.getElementById('submit-week-number').textContent = this.currentWeek;
+                this.renderPlayerPicks(player);
             }
 
-            updatePlayerConstraints(player) {
-                const usedTeams = Object.values(player.picks || {});
-                const usedTeamsDisplay = document.getElementById('used-teams-display');
-                const remainingCount = document.getElementById('remaining-teams-count');
-
-                if (usedTeams.length === 0) {
-                    usedTeamsDisplay.innerHTML = '<em>No teams used yet this season</em>';
-                } else {
-                    usedTeamsDisplay.innerHTML = usedTeams.map(team => 
-                        `<span class="used-team">${team}</span>`
-                    ).join('');
-                }
-
-                const remaining = 32 - usedTeams.length;
-                remainingCount.textContent = `${remaining} teams remaining`;
-                remainingCount.style.color = remaining > 20 ? 'var(--success-green)' : 
-                                            remaining > 10 ? 'var(--warning-orange)' : 'var(--danger-red)';
-            }
-
-            updatePickButtons(player) {
-                const usedTeams = Object.values(player.picks || {});
-
-                document.querySelectorAll('.pick-btn').forEach(btn => {
-                    const team = btn.dataset.team;
-                    if (usedTeams.includes(team)) {
-                        btn.disabled = true;
-                        btn.classList.add('disabled');
-                        btn.title = `${player.name} already picked ${team}`;
-                    } else {
-                        btn.disabled = false;
-                        btn.classList.remove('disabled');
-                        btn.title = '';
-                    }
-                });
-            }
-
-            selectTeamPick(button) {
-                if (button.disabled || !this.selectedPlayer) return;
-
-                // Clear previous selections
-                document.querySelectorAll('.pick-btn').forEach(btn => {
-                    btn.classList.remove('selected');
-                });
-
-                // Select current team
-                button.classList.add('selected');
-                this.selectedTeam = button.dataset.team;
-
-                // Show submit button
-                document.getElementById('submit-pick').style.display = 'inline-block';
-            }
-
-            submitPick() {
-                if (!this.selectedPlayer || !this.selectedTeam) {
-                    this.showError('Please select both a player and a team.');
-                    return;
-                }
-
+            renderPlayerPicks(player) {
                 const weekKey = `week${this.currentWeek}`;
+                const currentPick = player.picks[weekKey];
+                const usedTeams = Object.values(player.picks || {});
+                const teamsRemaining = 32 - usedTeams.length;
 
-                // Check if player already has a pick for this week
-                if (this.selectedPlayer.picks[weekKey]) {
-                    if (!confirm(`${this.selectedPlayer.name} already has a pick for Week ${this.currentWeek}. Replace it?`)) {
-                        return;
-                    }
-                }
-
-                // Save the pick
-                this.selectedPlayer.picks[weekKey] = this.selectedTeam;
-
-                if (this.saveData()) {
-                    this.showSuccess(`Pick submitted! ${this.selectedPlayer.name} picked ${this.selectedTeam} for Week ${this.currentWeek}`);
-
-                    // Clear selections
-                    document.querySelectorAll('.pick-btn').forEach(btn => {
-                        btn.classList.remove('selected');
-                    });
-                    document.getElementById('submit-pick').style.display = 'none';
-                    this.selectedTeam = null;
-
-                    // Update UI
-                    this.updatePlayerConstraints(this.selectedPlayer);
-                    this.updatePickButtons(this.selectedPlayer);
-                }
+                document.getElementById('games-display').innerHTML = `
+                    <div style="background: var(--bg-light); padding: 20px; border-radius: 12px; margin-bottom: 20px;">
+                        <h4 style="color: var(--nfl-blue); margin-bottom: 10px;">Pick for ${player.name} - Week ${this.currentWeek}</h4>
+                        <p><strong>Current Pick:</strong> ${currentPick || 'No pick made yet'}</p>
+                        <p><strong>Teams Used This Season:</strong> ${usedTeams.length}/32 teams</p>
+                        <p><strong>Teams Remaining:</strong> ${teamsRemaining} teams</p>
+                        ${usedTeams.length > 0 ? `
+                            <div style="margin-top: 10px;">
+                                <strong>Used Teams:</strong><br>
+                                ${usedTeams.map(team => `<span style="background: var(--danger-red); color: white; padding: 2px 8px; border-radius: 12px; font-size: 0.8em; margin: 2px;">${team}</span>`).join('')}
+                            </div>
+                        ` : ''}
+                    </div>
+                    <div style="text-align: center; padding: 40px; color: var(--nfl-silver);">
+                        <p>📅 Week ${this.currentWeek} games will be displayed here</p>
+                        <p>🏈 This is a simplified version - full game interface coming soon!</p>
+                        <p>For now, you can manage players and settings in the Admin section.</p>
+                    </div>
+                `;
             }
 
             changeWeek(direction) {
                 const newWeek = this.currentWeek + direction;
-                if (newWeek < 1 || newWeek > this.maxWeeks) return;
+                if (newWeek < 1 || newWeek > this.maxWeeks) {
+                    this.showNotification(`Cannot go to Week ${newWeek} - outside valid range`, 'error');
+                    return;
+                }
 
                 this.currentWeek = newWeek;
                 this.saveData();
                 this.updateUI();
+                this.showNotification(`Changed to Week ${this.currentWeek}`, 'info');
             }
 
             addPlayer() {
@@ -1473,17 +953,17 @@
 
                 const name = nameInput.value.trim();
                 if (!name) {
-                    this.showError('Please enter a player name');
+                    this.showNotification('Please enter a player name', 'error');
                     return;
                 }
 
                 if (this.players.some(p => p.name.toLowerCase() === name.toLowerCase())) {
-                    this.showError('A player with that name already exists');
+                    this.showNotification('A player with that name already exists', 'error');
                     return;
                 }
 
                 const newPlayer = {
-                    id: Date.now(), // Use timestamp as unique ID
+                    id: Date.now(),
                     name: name,
                     picks: {},
                     points: 0,
@@ -1494,16 +974,29 @@
                 nameInput.value = '';
 
                 if (this.saveData()) {
-                    this.showSuccess(`${name} has been added to the pool!`);
+                    this.showNotification(`${name} added to the pool!`, 'success');
                     this.updateUI();
                     this.renderAdminPanel();
                 }
             }
 
+            removePlayer(playerId) {
+                const player = this.players.find(p => p.id === playerId);
+                if (!player) return;
+
+                if (confirm(`Remove ${player.name} from the pool? This cannot be undone.`)) {
+                    this.players = this.players.filter(p => p.id !== playerId);
+
+                    if (this.saveData()) {
+                        this.showNotification(`${player.name} removed from pool`, 'success');
+                        this.updateUI();
+                        this.renderAdminPanel();
+                    }
+                }
+            }
+
             renderAdminPanel() {
                 this.renderPlayerList();
-                this.renderGameResults();
-                this.updateSystemStatus();
             }
 
             renderPlayerList() {
@@ -1511,22 +1004,21 @@
                 if (!playerList) return;
 
                 if (this.players.length === 0) {
-                    playerList.innerHTML = '<p style="color: var(--nfl-silver); font-style: italic;">No players in pool yet. Add some players above!</p>';
+                    playerList.innerHTML = '<p style="color: var(--nfl-silver); font-style: italic;">No players yet. Add some above!</p>';
                     return;
                 }
 
                 playerList.innerHTML = '';
 
-                this.players.forEach((player, index) => {
-                    const playerDiv = document.createElement('div');
-                    playerDiv.className = 'player-item';
-
+                this.players.forEach(player => {
                     const totalPicks = Object.keys(player.picks || {}).length;
 
+                    const playerDiv = document.createElement('div');
+                    playerDiv.className = 'player-item';
                     playerDiv.innerHTML = `
                         <div class="player-info">
                             <div class="player-name">${player.name}</div>
-                            <div class="player-stats">${player.points} points • ${player.record.wins}-${player.record.losses} • ${totalPicks} picks made</div>
+                            <div class="player-stats">${player.points} points • ${totalPicks} picks made • ${32-totalPicks} teams remaining</div>
                         </div>
                         <button class="btn btn--danger btn--sm remove-player-btn" data-player-id="${player.id}">Remove</button>
                     `;
@@ -1534,7 +1026,7 @@
                     playerList.appendChild(playerDiv);
                 });
 
-                // Add remove button event listeners
+                // Add remove button listeners
                 document.querySelectorAll('.remove-player-btn').forEach(btn => {
                     btn.addEventListener('click', (e) => {
                         const playerId = parseInt(e.target.dataset.playerId);
@@ -1543,323 +1035,111 @@
                 });
             }
 
-            removePlayer(playerId) {
-                const player = this.players.find(p => p.id === playerId);
-                if (!player) return;
-
-                if (confirm(`Are you sure you want to remove ${player.name} from the pool? This cannot be undone.`)) {
-                    this.players = this.players.filter(p => p.id !== playerId);
-
-                    if (this.saveData()) {
-                        this.showSuccess(`${player.name} has been removed from the pool.`);
-                        this.updateUI();
-                        this.renderAdminPanel();
-                    }
-                }
-            }
-
-            renderGameResults() {
-                const resultsContainer = document.getElementById('results-container');
-                const weekNumber = document.getElementById('results-week-number');
-
-                if (weekNumber) {
-                    weekNumber.textContent = this.currentWeek;
-                }
-
-                if (!resultsContainer) return;
-
-                const weekData = this.nflSchedule[this.currentWeek];
-                if (!weekData || !weekData.games) {
-                    resultsContainer.innerHTML = '<p style="color: var(--nfl-silver);">No games available for this week.</p>';
-                    return;
-                }
-
-                resultsContainer.innerHTML = '';
-
-                weekData.games.forEach(game => {
-                    const gameDiv = document.createElement('div');
-                    gameDiv.className = 'form-row';
-                    gameDiv.style.alignItems = 'center';
-                    gameDiv.style.padding = '15px';
-                    gameDiv.style.background = 'var(--bg-light)';
-                    gameDiv.style.borderRadius = '8px';
-                    gameDiv.style.marginBottom = '10px';
-
-                    gameDiv.innerHTML = `
-                        <div class="form-group" style="flex: 2;">
-                            <strong>${game.away_team} @ ${game.home_team}</strong><br>
-                            <small style="color: var(--nfl-silver);">${game.date} • ${game.time} • ${game.network}</small>
-                        </div>
-                        <div class="form-group">
-                            <label>Winner:</label>
-                            <select data-game-id="${game.game_id}">
-                                <option value="">Select Winner</option>
-                                <option value="${game.away_team}" ${game.winner === game.away_team ? 'selected' : ''}>${game.away_team}</option>
-                                <option value="${game.home_team}" ${game.winner === game.home_team ? 'selected' : ''}>${game.home_team}</option>
-                            </select>
-                        </div>
-                    `;
-
-                    resultsContainer.appendChild(gameDiv);
-                });
-            }
-
-            saveGameResults() {
-                const weekData = this.nflSchedule[this.currentWeek];
-                if (!weekData) return;
-
-                let resultsUpdated = 0;
-
-                document.querySelectorAll('#results-container select').forEach(select => {
-                    const gameId = select.dataset.gameId;
-                    const winner = select.value;
-
-                    const game = weekData.games.find(g => g.game_id === gameId);
-                    if (game && winner) {
-                        game.winner = winner;
-                        game.game_status = 'final';
-                        resultsUpdated++;
-                    }
-                });
-
-                if (resultsUpdated > 0) {
-                    // Calculate points for all players
-                    this.calculateWeeklyPoints(this.currentWeek);
-
-                    // Update week status if all games have results
-                    const allGamesComplete = weekData.games.every(game => game.winner);
-                    if (allGamesComplete) {
-                        weekData.status = 'completed';
-                    }
-
-                    if (this.saveData()) {
-                        this.showSuccess(`Results saved for ${resultsUpdated} games. Points updated for all players.`);
-                        this.updateUI();
-                        this.renderStandings();
-                    }
-                } else {
-                    this.showError('No results to save. Please select winners for the games.');
-                }
-            }
-
-            calculateWeeklyPoints(weekNumber) {
-                const weekData = this.nflSchedule[weekNumber];
-                if (!weekData) return;
-
-                const weekKey = `week${weekNumber}`;
-
-                this.players.forEach(player => {
-                    const playerPick = player.picks[weekKey];
-                    if (!playerPick) return;
-
-                    // Find if player's pick won
-                    const wonGame = weekData.games.find(game => 
-                        game.winner === playerPick
-                    );
-
-                    if (wonGame) {
-                        player.points = (player.points || 0) + 1;
-                        player.record.wins = (player.record.wins || 0) + 1;
-                    } else {
-                        // Only count as loss if game is complete
-                        const lostGame = weekData.games.find(game => 
-                            (game.winner && game.winner !== playerPick && 
-                             (game.away_team === playerPick || game.home_team === playerPick))
-                        );
-
-                        if (lostGame) {
-                            player.record.losses = (player.record.losses || 0) + 1;
-                        }
-                    }
-                });
-
-                console.log(`📊 Points calculated for Week ${weekNumber}`);
-            }
-
             renderStandings() {
                 const tbody = document.getElementById('standings-tbody');
                 if (!tbody) return;
 
                 if (this.players.length === 0) {
-                    tbody.innerHTML = '<tr><td colspan="6" class="loading">No players in pool yet</td></tr>';
+                    tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; color: var(--nfl-silver); font-style: italic;">No players in pool yet</td></tr>';
                     return;
                 }
 
-                // Sort players by points (descending), then by wins
-                const sortedPlayers = [...this.players].sort((a, b) => {
-                    if (b.points !== a.points) return b.points - a.points;
-                    return (b.record?.wins || 0) - (a.record?.wins || 0);
-                });
+                // Sort players by points
+                const sortedPlayers = [...this.players].sort((a, b) => (b.points || 0) - (a.points || 0));
 
                 tbody.innerHTML = '';
 
                 sortedPlayers.forEach((player, index) => {
-                    const row = document.createElement('tr');
-                    const lastPick = this.getLastPick(player);
                     const teamsUsed = Object.keys(player.picks || {}).length;
                     const teamsRemaining = 32 - teamsUsed;
                     const wins = player.record?.wins || 0;
                     const losses = player.record?.losses || 0;
 
+                    const row = document.createElement('tr');
                     row.innerHTML = `
                         <td class="rank-cell">${index + 1}</td>
                         <td><strong>${player.name}</strong></td>
                         <td class="points-cell">${player.points || 0}</td>
                         <td>${wins}-${losses}</td>
-                        <td>${lastPick || 'No picks yet'}</td>
-                        <td>${teamsRemaining} teams</td>
+                        <td>${teamsUsed}</td>
+                        <td>${teamsRemaining}</td>
                     `;
-
                     tbody.appendChild(row);
                 });
             }
 
-            getLastPick(player) {
-                const picks = player.picks || {};
-                const weeks = Object.keys(picks).sort((a, b) => {
-                    const weekA = parseInt(a.replace('week', ''));
-                    const weekB = parseInt(b.replace('week', ''));
-                    return weekB - weekA;
-                });
-                return weeks.length > 0 ? picks[weeks[0]] : null;
-            }
-
-            renderTeamTracker() {
-                // Implementation for team usage matrix
-                const container = document.getElementById('team-matrix-container');
-                if (!container) return;
-
-                container.innerHTML = '<div class="loading">Team tracker functionality coming soon...</div>';
-            }
-
-            renderFullSchedule() {
-                // Implementation for full season schedule
-                const container = document.getElementById('schedule-container');
-                if (!container) return;
-
-                container.innerHTML = '<div class="loading">Full schedule view coming soon...</div>';
-            }
-
-            updateSystemStatus() {
-                const totalPicks = this.players.reduce((total, player) => {
-                    return total + Object.keys(player.picks || {}).length;
-                }, 0);
-
-                document.getElementById('total-picks').textContent = totalPicks;
-                document.getElementById('storage-status').textContent = 'OK';
-            }
-
-            startCountdownTimer() {
-                // Implementation for pick deadline countdown
-                setInterval(() => {
-                    const weekData = this.nflSchedule[this.currentWeek];
-                    if (!weekData || !weekData.pick_deadline) return;
-
-                    const deadline = new Date(weekData.pick_deadline);
-                    const now = new Date();
-                    const timeLeft = deadline - now;
-
-                    const countdownElement = document.getElementById('deadline-countdown');
-                    if (countdownElement && timeLeft > 0) {
-                        const hours = Math.floor(timeLeft / (1000 * 60 * 60));
-                        const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-                        countdownElement.textContent = ` (${hours}h ${minutes}m left)`;
-                    }
-                }, 60000); // Update every minute
-            }
-
-            // Utility methods
-            showSuccess(message) {
-                console.log('✅', message);
-                // You could implement a toast notification system here
-                alert('✅ ' + message);
-            }
-
-            showError(message) {
-                console.error('❌', message);
-                // You could implement a toast notification system here
-                alert('❌ ' + message);
-            }
-
-            updatePoolSettings() {
-                const entryFee = document.getElementById('entry-fee')?.value;
-                const poolName = document.getElementById('pool-name')?.value;
-
-                if (entryFee) this.entryFee = parseInt(entryFee);
-                if (poolName) this.poolName = poolName;
-
-                if (this.saveData()) {
-                    this.showSuccess('Pool settings updated successfully!');
+            updateCurrentWeek() {
+                const weekSelect = document.getElementById('admin-current-week');
+                if (weekSelect) {
+                    this.currentWeek = parseInt(weekSelect.value) || 1;
+                    this.saveData();
                     this.updateUI();
-                }
-            }
-
-            lockPicks() {
-                const weekData = this.nflSchedule[this.currentWeek];
-                if (weekData) {
-                    weekData.status = 'locked';
-                    if (this.saveData()) {
-                        this.showSuccess(`Week ${this.currentWeek} picks are now locked.`);
-                        this.updateUI();
-                    }
-                }
-            }
-
-            unlockPicks() {
-                const weekData = this.nflSchedule[this.currentWeek];
-                if (weekData) {
-                    weekData.status = 'upcoming';
-                    if (this.saveData()) {
-                        this.showSuccess(`Week ${this.currentWeek} picks are now unlocked.`);
-                        this.updateUI();
-                    }
+                    this.showNotification(`Week updated to ${this.currentWeek}`, 'success');
                 }
             }
 
             advanceWeek() {
                 if (this.currentWeek >= this.maxWeeks) {
-                    this.showError('Already at the final week of the season.');
+                    this.showNotification('Already at final week of season', 'error');
                     return;
                 }
 
-                if (confirm(`Advance to Week ${this.currentWeek + 1}? Make sure all results for Week ${this.currentWeek} are entered.`)) {
+                if (confirm(`Advance to Week ${this.currentWeek + 1}?`)) {
                     this.currentWeek++;
-                    if (this.saveData()) {
-                        this.showSuccess(`Advanced to Week ${this.currentWeek}`);
+                    this.saveData();
+                    this.updateUI();
+                    this.showNotification(`Advanced to Week ${this.currentWeek}`, 'success');
+                }
+            }
+
+            updateSettings() {
+                const entryFeeInput = document.getElementById('entry-fee');
+                if (entryFeeInput) {
+                    this.entryFee = parseInt(entryFeeInput.value) || 20;
+                    this.saveData();
+                    this.updateUI();
+                    this.showNotification('Settings updated successfully', 'success');
+                }
+            }
+
+            resetPool() {
+                if (confirm('Reset the entire pool? This will remove all players and picks. This cannot be undone!')) {
+                    if (confirm('Are you absolutely sure? This will delete EVERYTHING!')) {
+                        this.players = [];
+                        this.currentWeek = 1;
+                        this.entryFee = 20;
+                        localStorage.removeItem('nflPickEmPoolFixed');
                         this.updateUI();
+                        this.renderAdminPanel();
+                        this.showNotification('Pool has been completely reset', 'success');
                     }
                 }
             }
 
-            updateWeekStatus() {
-                const weekStatus = document.getElementById('week-status-select')?.value;
-                if (weekStatus) {
-                    const weekData = this.nflSchedule[this.currentWeek];
-                    if (weekData) {
-                        weekData.status = weekStatus;
-                        if (this.saveData()) {
-                            this.showSuccess(`Week ${this.currentWeek} status updated to: ${weekStatus}`);
-                            this.updateUI();
-                        }
-                    }
+            clearAllPicks() {
+                if (confirm('Clear all picks for all players? Players will remain, but all their picks will be removed.')) {
+                    this.players.forEach(player => {
+                        player.picks = {};
+                        player.points = 0;
+                        player.record = { wins: 0, losses: 0 };
+                    });
+
+                    this.saveData();
+                    this.updateUI();
+                    this.renderAdminPanel();
+                    this.showNotification('All picks cleared', 'success');
                 }
             }
         }
 
-        // Initialize the application when page loads
+        // Initialize when page loads
         document.addEventListener('DOMContentLoaded', () => {
-            console.log('🏈 Initializing Professional NFL Pick-Em Pool...');
+            console.log('🚀 Starting Fixed NFL Pick-Em Pool...');
             try {
-                window.pickemPool = new ProfessionalPickEmPool();
+                window.pickemPool = new FixedPickEmPool();
             } catch (error) {
-                console.error('❌ Failed to initialize:', error);
-                alert('Failed to initialize the Pick-Em Pool system. Please refresh the page and try again.');
+                console.error('❌ Initialization failed:', error);
             }
-        });
-
-        // Global error handler
-        window.addEventListener('error', (event) => {
-            console.error('🚨 Global error:', event.error);
         });
     </script>
 </body>
